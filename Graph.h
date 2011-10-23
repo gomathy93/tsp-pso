@@ -15,9 +15,8 @@ namespace PSO
 			adjacencyMatrix = new float*[0];
 			vertexCount = 0;
 		}
-	public:
-		/** Tworzy graf o V wierzcholkach */
-		Graph(int V) 
+
+		void allocateMatrix(int V)
 		{
 			vertexCount = V;
 			adjacencyMatrix = new float*[V];
@@ -28,11 +27,18 @@ namespace PSO
 					adjacencyMatrix[i][j] = 0.0f;
 			}
 		}
+	public:
+		/** Tworzy graf o V wierzcholkach */
+		Graph(int V) 
+		{
+			allocateMatrix(V);
+		}
 
-		/** Tworzy graf z V wierzcholkami i E krawedziami o dlugosciach z zakresu (0, maxDist) */
+		/** Tworzy graf z V wierzcholkami i E krawedziami o dlugosciach z zakresu (0.1, maxDist) */
 		Graph(int V, int E, float maxDist)
 		{
-			Graph::Graph(V);
+			allocateMatrix(V);
+
 			for(int i=0; i<E; i++)
 			{
 				while(1)
@@ -41,7 +47,7 @@ namespace PSO
 					int v = rand()%vertexCount;
 					if(v == u) continue;
 					if(isEdge(u, v)) continue;
-					addEdge(u, v);
+					addEdge(u, v, randf(0.1f, maxDist));
 					break;
 				}
 			}
