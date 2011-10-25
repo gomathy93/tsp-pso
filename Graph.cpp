@@ -31,8 +31,11 @@ float PSO::Graph::hamiltonLength(std::vector<int>& cycle) {
 	if(cycle.size() != vertexCount)	return MAX_FLOAT;
 
 	float dist = 0.0f;
-	for(int i=0; i<vertexCount-1; i++)
+	for(int i=0; i<vertexCount-1; i++) {
+		if(adjacencyMatrix[cycle[i]][cycle[i+1]] == 0.0f) return MAX_FLOAT; // brak sciezki
 		dist += adjacencyMatrix[cycle[i]][cycle[i+1]];
+	}
+	if(adjacencyMatrix[cycle[vertexCount-1]][cycle[0]] == 0.0f)	return MAX_FLOAT; // brak sciezki
 	dist += adjacencyMatrix[cycle[vertexCount-1]][cycle[0]];
 	return dist;
 }
