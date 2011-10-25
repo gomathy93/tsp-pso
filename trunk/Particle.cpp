@@ -19,12 +19,12 @@ void PSO::Particle::update() {
 	Graph* graph = swarm->g;
 
 	float fit = graph->hamiltonLength(position.toPermut());
-	if(fit < swarm->bestFit) {
+	if(fit < swarm->bestFit || swarm->best.count() == 0) {
 		swarm->best = position;
 		swarm->bestFit = fit;
 		swarm->noChange = 0;
 	}
-	if(fit < bestFit) {
+	if(fit < bestFit || best.count() == 0) {
 		best = position;
 		bestFit = fit;
 	}

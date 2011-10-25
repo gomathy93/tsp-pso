@@ -26,7 +26,7 @@ namespace PSO {
 		int			noChange;
 
 		/** Tworzy roj rozwiazujacy TSP dla grafu g */
-		TspSwarm(Graph* g);
+		TspSwarm(Graph* g, unsigned int particlesCount);
 		/** Rozpoczyna obliczenia */
 		void compute();
 	};
