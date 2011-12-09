@@ -3,6 +3,7 @@
 #include "Graph.h"
 #include "TspSwarm.h"
 #include "RandomSearch.h"
+#include "SimulatedAnnealing.h"
 
 using namespace WMH;
 
@@ -16,7 +17,8 @@ int main(int argc, char* argv[]) {
 	std::vector<iAlgo*>	algos;
 	algos.push_back(new PSO::TspSwarm(&g, 50));
 	algos.push_back(new RS::RandomSearch(&g));
-	std::cout << "Algorithm\tBest cost\tComputation time" << std::endl;
+	algos.push_back(new SA::SimulatedAnnealing(&g));
+	std::cout << "Algorithm\t\tBest cost\tComputation time" << std::endl;
 	for(unsigned int i=0; i<algos.size(); i++)
 	{
 		algos[i]->compute();

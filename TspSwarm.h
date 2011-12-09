@@ -14,8 +14,6 @@ namespace WMH {
 			friend class Particle;
 			/** Maksymalna liczba iteracji ktora nie poprawia globalnego wyniku */
 			int NOCHANGE_MAX;
-			/** Maksymalna liczba iteracji ogolem */
-			int ITER_MAX;
 			/** Zablokowany - jakis problem trzeba rozwiazywac */
 			TspSwarm() {}
 			/** Czas obliczen w ms */
@@ -31,12 +29,10 @@ namespace WMH {
 			float		bestFit;
 			/** Liczba iteracji ktora nie poprawila wyniku */
 			int			noChange;
-			/** Liczba iteracji */
-			int			iter;
 		public:
 
 			/** Tworzy roj rozwiazujacy TSP dla grafu g */
-			TspSwarm(Graph* g, unsigned int particlesCount, int maxNoChange = 1000, int maxIter = 1000000);
+			TspSwarm(Graph* g, unsigned int particlesCount, int maxNoChange = 1000);
 			
 			/** Rozpoczyna obliczenia */
 			void compute();
@@ -56,7 +52,7 @@ namespace WMH {
 			/** Zwraca nazwe algorytmu */
 			inline const char* getAlgorithmName() const
 			{
-				return "PSO\t";
+				return "PSO\t\t";
 			}
 
 			/** Zwraca czas obliczen w ms */
@@ -64,9 +60,6 @@ namespace WMH {
 			{
 				return computationTime;
 			}
-
-			/** Zapisuje otrzymane wyniki do strumienia */
-			friend std::ostream& operator << (std::ostream& stream, const PSO::TspSwarm& swarm);
 		};
 	}; // namespace PSO
 }; // namespace TSP
