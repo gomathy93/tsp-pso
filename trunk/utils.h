@@ -1,6 +1,6 @@
 #pragma once
 
-namespace PSO {
+namespace WMH {
 	/** Losuje liczbe z przedzialu [0, 1] */
 	inline static float randf()	{
 		return rand()/static_cast<float>(RAND_MAX);

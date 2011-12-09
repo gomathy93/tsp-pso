@@ -179,10 +179,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Particle.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -202,10 +198,18 @@
 					/>
 				</FileConfiguration>
 			</File>
-			<File
-				RelativePath=".\TspSwarm.cpp"
+			<Filter
+				Name="PSO"
 				>
-			</File>
+				<File
+					RelativePath=".\Particle.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\TspSwarm.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -213,7 +217,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\Features.h"
+				RelativePath=".\Algo.h"
 				>
 			</File>
 			<File
@@ -221,7 +225,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Particle.h"
+				RelativePath=".\RandomSearch.h"
 				>
 			</File>
 			<File
@@ -229,13 +233,25 @@
 				>
 			</File>
 			<File
-				RelativePath=".\TspSwarm.h"
-				>
-			</File>
-			<File
 				RelativePath=".\utils.h"
 				>
 			</File>
+			<Filter
+				Name="PSO"
+				>
+				<File
+					RelativePath=".\Features.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Particle.h"
+					>
+				</File>
+				<File
+					RelativePath=".\TspSwarm.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

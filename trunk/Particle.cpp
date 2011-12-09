@@ -4,17 +4,17 @@
 #include "TspSwarm.h"
 #include "utils.h"
 
-const float PSO::Particle::OMEGA = 0.72f;
-const float PSO::Particle::C1 = 2.0f;
-const float PSO::Particle::C2 = 2.0f;
+const float WMH::PSO::Particle::OMEGA = 0.72f;
+const float WMH::PSO::Particle::C1 = 2.0f;
+const float WMH::PSO::Particle::C2 = 2.0f;
 
-void PSO::Particle::init(TspSwarm* swarm) {
+void WMH::PSO::Particle::init(TspSwarm* swarm) {
 	this->swarm = swarm;
 	position.randomize(swarm->g->V());
 	speed.randomize(swarm->g->V());
 }
 
-void PSO::Particle::update() {
+void WMH::PSO::Particle::update() {
 	Features& bestGlobal = swarm->best;
 	Graph* graph = swarm->g;
 
