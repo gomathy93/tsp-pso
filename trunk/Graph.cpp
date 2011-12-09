@@ -12,6 +12,21 @@ void WMH::Graph::allocateMatrix(int V) {
 	}
 }
 
+void WMH::Graph::copyMatrix(const Graph& g2) {
+	allocateMatrix(g2.V());
+	for(int i=0; i<vertexCount; i++)
+		for(int j=0; j<vertexCount; j++)
+			adjacencyMatrix[i][j] = g2.adjacencyMatrix[i][j];
+}
+
+void WMH::Graph::freeMatrix() {
+	if(adjacencyMatrix)	{
+		for (int i = 0; i < vertexCount; i++)
+			delete[] adjacencyMatrix[i];
+		delete[] adjacencyMatrix;
+	}
+}
+
 WMH::Graph::Graph(int V, float maxDist) {
 	allocateMatrix(V);
 
@@ -23,7 +38,7 @@ WMH::Graph::Graph(int V, float maxDist) {
 			addEdge(i, j, randf(0.1f, maxDist));
 }
 
-float WMH::Graph::hamiltonLength(std::vector<int>& cycle) {
+float WMH::Graph::hamiltonLength(std::vector<int>& cycle) const {
 	if(cycle.size() != vertexCount)	return MAX_FLOAT;
 
 	float dist = 0.0f;
@@ -36,14 +51,11 @@ float WMH::Graph::hamiltonLength(std::vector<int>& cycle) {
 	return dist;
 }
 
-std::ostream& WMH::operator << (std::ostream& stream, const WMH::Graph& g)
-{
+std::ostream& WMH::operator << (std::ostream& stream, const WMH::Graph& g) {
 
 	stream << g.V() << std::endl;
-	for(int i=0; i<g.V(); i++)
-	{
-		for(int j=0; j<g.V(); j++)
-			stream << g.getDist(i, j) << '\t';
+	for(int i=0; i<g.V(); i++) {
+		for(int j=0; j<g.V(); j++) stream << g.getDist(i, j) << '\t';
 		stream << std::endl;
 	}
 	return stream;

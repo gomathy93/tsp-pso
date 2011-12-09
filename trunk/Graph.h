@@ -19,6 +19,12 @@ namespace WMH {
 
 		/** Alokuje pamiec na V wierzcholkow */
 		void allocateMatrix(int V);
+
+		/** Przypisuje graf g2, usun wczesniejsza macierz! */
+		void copyMatrix(const Graph& g2);
+
+		/** Zwalnia pamiec na macierz */
+		void freeMatrix();
 	public:
 		/** Tworzy graf o V wierzcholkach */
 		Graph(int V) {
@@ -28,11 +34,23 @@ namespace WMH {
 		/** Tworzy graf pelny z V wierzcholkami o dlugosciach z zakresu (0.1, maxDist) */
 		Graph(int V, float maxDist);
 
+		/** To musi byc zadeklarowane zeby uniknac glupich bledow */
+		Graph(const Graph& g2) {
+			copyMatrix(g2);
+		}
+
+		/** To musi byc zadeklarowane zeby uniknac glupich bledow */
+		Graph& operator = (const Graph& g2)	{
+			if (this == &g2) 
+				return *this;
+			freeMatrix();
+			copyMatrix(g2);
+			return *this;
+		} 
+
 		/** Destruktor */
 		~Graph() {
-			for (int i = 0; i < vertexCount; i++)
-				delete[] adjacencyMatrix[i];
-			delete[] adjacencyMatrix;
+			freeMatrix();
 		}
 
 		/** Dodaje krawedz i-j o dlugosci dist */
@@ -68,13 +86,12 @@ namespace WMH {
 		}
 
 		/** Zwraca liczbe wierzcholkow */
-		inline int V() const
-		{
+		inline int V() const {
 			return vertexCount;
 		}
 
 		/** Wylicza dlugosc cyklu Hamiltona */
-		float hamiltonLength(std::vector<int>& cycle);
+		float hamiltonLength(std::vector<int>& cycle) const;
 
 		/** Zapisuje graf do strumienia */
 		friend std::ostream& operator << (std::ostream& stream, const WMH::Graph& g);

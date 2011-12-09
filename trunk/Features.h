@@ -10,8 +10,7 @@ namespace WMH {
 			/** Lista wartosci */
 			std::vector<float>	values;
 
-			inline void assign(const Features& f2)
-			{
+			inline void assign(const Features& f2) {
 				unsigned int n = f2.values.size();
 				values.resize(n);
 				for(unsigned int i=0; i<n; i++)
