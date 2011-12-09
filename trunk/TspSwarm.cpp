@@ -4,17 +4,21 @@
 
 WMH::PSO::TspSwarm::TspSwarm(Graph* g, unsigned int particlesCount, 
 							 int maxNoChange, int maxIter) {
-	noChange = 0;
-	iter = 0;
 	NOCHANGE_MAX = maxNoChange;
 	ITER_MAX = maxIter;
 	this->g = g;
 	bestFit = MAX_FLOAT;
 	particles.resize(particlesCount);
+	computationTime = 0;
+	noChange = 0;
+	iter = 0;
 }
 
 
 void WMH::PSO::TspSwarm::compute() {
+	computationTime = GetTickCount();
+	noChange = 0;
+	iter = 0;
 	for(unsigned int i=0; i<particles.size(); i++) 
 		particles[i].init(this);
 
@@ -23,6 +27,7 @@ void WMH::PSO::TspSwarm::compute() {
 		iter++;
 		for(unsigned int i=0; i<particles.size(); i++)	particles[i].update();
 	}
+	computationTime = GetTickCount() - computationTime;
 }
 
 std::ostream& WMH::PSO::operator << (std::ostream& stream, const WMH::PSO::TspSwarm& swarm)
