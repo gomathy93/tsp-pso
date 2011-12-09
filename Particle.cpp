@@ -16,7 +16,7 @@ void WMH::PSO::Particle::init(TspSwarm* swarm) {
 
 void WMH::PSO::Particle::update() {
 	Features& bestGlobal = swarm->best;
-	Graph* graph = swarm->g;
+	const Graph* graph = swarm->g;
 
 	float fit = graph->hamiltonLength(position.toPermut());
 	if(fit < swarm->bestFit || swarm->best.count() == 0) {

@@ -6,10 +6,9 @@
 namespace WMH {
 	namespace SA {
 		/** TSP metoda symulowanego wyzarzania */
-		class SimulatedAnnealing : public iAlgo
-		{
+		class SimulatedAnnealing : public iAlgo	{
 			/** Przetwarzany graf */
-			Graph*				g;
+			const Graph*		g;
 			/** Aktualna temperatura */
 			float				temp;
 			/** Temperatura poczatkowa */
@@ -38,9 +37,8 @@ namespace WMH {
 			DWORD				computationTime;
 		public:
 			/** -1 = liczba wierzcholkow */
-			SimulatedAnnealing(Graph* g, int maxInnerIter = -1, 
-				float startTemp = 10.0f, float stopTemp = 1.0E-4f, float coolingFactor = 0.9f)
-			{
+			SimulatedAnnealing(const Graph* g, int maxInnerIter = -1, 
+				float startTemp = 10.0f, float stopTemp = 1.0E-4f, float coolingFactor = 0.9f) {
 				this->g = g;
 				INNER_ITER_MAX = (maxInnerIter == -1) ? g->V() : maxInnerIter;
 				START_TEMP = startTemp;
@@ -48,13 +46,11 @@ namespace WMH {
 				COOLING_FACTOR = coolingFactor;
 			}
 
-			void compute()
-			{
+			void compute() {
 				computationTime = GetTickCount();;
 				// inicjacja
 				currSolution.resize(g->V());
-				for(int i=0; i<g->V(); i++)
-					currSolution[i] = i;
+				for(int i=0; i<g->V(); i++) currSolution[i] = i;
 				currCost = g->hamiltonLength(currSolution);
 
 				prevSolution = currSolution;
@@ -64,11 +60,9 @@ namespace WMH {
 
 				temp = START_TEMP;
 
-				while (temp > STOP_TEMP) 
-				{
+				while (temp > STOP_TEMP) {
 					innerInter = 0;
-					while (innerInter < INNER_ITER_MAX) 
-					{
+					while (innerInter < INNER_ITER_MAX) {
 						innerInter++;
 
 						// generujemy nowe rozwiazanie
@@ -87,13 +81,11 @@ namespace WMH {
 						* koszt od poprzedniego, jednak spelnione jest
 						* prawdopodobienstwo zamiany rozwiania pomimo gorszego kosztu
 						*/
-						randf() < expf(-costDiff/temp)) 
-						{
+						randf() < expf(-costDiff/temp)) {
 							prevSolution = currSolution;
 							prevCost = currCost;
 							// Aktualizujemy najlepsze rozwiazanie
-							if (currCost < bestCost) 
-							{
+							if (currCost < bestCost) {
 								bestCost = currCost;
 								bestSolution = currSolution;
 							}
@@ -105,27 +97,28 @@ namespace WMH {
 			}
 
 			/** Zwraca koszt najlepszego rozwiazania */
-			inline float getBestCost() const
-			{
+			inline float getBestCost() const {
 				return bestCost;
 			}
 
 			/** Zwraca najlepsze rozwiazanie */
-			inline std::vector<int> getBestSolution() const
-			{
+			inline std::vector<int> getBestSolution() const	{
 				return bestSolution;
 			}
 
 			/** Zwraca nazwe algorytmu */
-			inline const char* getAlgorithmName() const
-			{
+			inline const char* getAlgorithmName() const	{
 				return "SimulatedAnnealing";
 			}
 
 			/** Zwraca czas obliczen w ms */
-			inline DWORD getComputationTime() const
-			{
+			inline DWORD getComputationTime() const	{
 				return computationTime;
+			}
+
+			/** Zwraca graf na ktorym wykonywane sa obliczenia */
+			virtual const Graph* getGraph() const {
+				return g;
 			}
 		};
 	};

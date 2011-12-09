@@ -20,7 +20,7 @@ namespace WMH {
 			DWORD computationTime;
 		protected:
 			/** Graf dla ktorego przeprowadzane sa obliczenia */
-			Graph*	g;
+			const Graph*	g;
 			/** List czastek */
 			std::vector<Particle> particles;
 			/** Najlepsze znalezione rozwiazanie (globalne) */
@@ -32,33 +32,34 @@ namespace WMH {
 		public:
 
 			/** Tworzy roj rozwiazujacy TSP dla grafu g */
-			TspSwarm(Graph* g, unsigned int particlesCount, int maxNoChange = 1000);
+			TspSwarm(const Graph* g, unsigned int particlesCount, int maxNoChange = 1000);
 			
 			/** Rozpoczyna obliczenia */
 			void compute();
 			
 			/** Zwraca koszt najlepszego rozwiazania */
-			inline float getBestCost() const
-			{
+			inline float getBestCost() const {
 				return bestFit;
 			}
 			
 			/** Zwraca najlepsze rozwiazanie */
-			inline std::vector<int> getBestSolution() const
-			{
+			inline std::vector<int> getBestSolution() const {
 				return best.toPermut();
 			}
 			
 			/** Zwraca nazwe algorytmu */
-			inline const char* getAlgorithmName() const
-			{
+			inline const char* getAlgorithmName() const {
 				return "PSO\t\t";
 			}
 
 			/** Zwraca czas obliczen w ms */
-			inline DWORD getComputationTime() const
-			{
+			inline DWORD getComputationTime() const	{
 				return computationTime;
+			}
+
+			/** Zwraca graf na ktorym wykonywane sa obliczenia */
+			virtual const Graph* getGraph() const {
+				return g;
 			}
 		};
 	}; // namespace PSO

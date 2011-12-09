@@ -2,7 +2,7 @@
 
 #include "TspSwarm.h"
 
-WMH::PSO::TspSwarm::TspSwarm(Graph* g, unsigned int particlesCount, int maxNoChange) {
+WMH::PSO::TspSwarm::TspSwarm(const Graph* g, unsigned int particlesCount, int maxNoChange) {
 	NOCHANGE_MAX = maxNoChange;
 	this->g = g;
 	bestFit = MAX_FLOAT;
