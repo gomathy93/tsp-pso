@@ -4,7 +4,7 @@
 
 #include "Features.h"
 
-namespace PSO {
+namespace WMH {
 	/** Klasa reprezentuje graf, wybrano reprezentacje macierzowa */
 	class Graph {
 		/** Macierz sasiedztwa */
@@ -25,8 +25,8 @@ namespace PSO {
 			allocateMatrix(V);
 		}
 
-		/** Tworzy graf z V wierzcholkami i E krawedziami o dlugosciach z zakresu (0.1, maxDist) */
-		Graph(int V, int E, float maxDist);
+		/** Tworzy graf pelny z V wierzcholkami o dlugosciach z zakresu (0.1, maxDist) */
+		Graph(int V, float maxDist);
 
 		/** Destruktor */
 		~Graph() {
@@ -36,36 +36,47 @@ namespace PSO {
 		}
 
 		/** Dodaje krawedz i-j o dlugosci dist */
-		void addEdge(int i, int j, float dist) {
-			if (i >= 0 && i < vertexCount && j > 0 && j < vertexCount) {
+		inline void addEdge(int i, int j, float dist) {
+			if (i >= 0 && i < vertexCount && j >= 0 && j < vertexCount) {
 				adjacencyMatrix[i][j] = dist;
 				adjacencyMatrix[j][i] = dist;
 			}
 		}
 
 		/** Usuwa krawedz i-j */
-		void removeEdge(int i, int j) {
-			if (i >= 0 && i < vertexCount && j > 0 && j < vertexCount) {
+		inline void removeEdge(int i, int j) {
+			if (i >= 0 && i < vertexCount && j >= 0 && j < vertexCount) {
 				adjacencyMatrix[i][j] = 0.0f;
 				adjacencyMatrix[j][i] = 0.0f;
 			}
 		}
 
 		/** Sprawdza czy istnieje krawedz i-j */
-		bool isEdge(int i, int j) { 
-			if (i >= 0 && i < vertexCount && j > 0 && j < vertexCount)
+		inline bool isEdge(int i, int j) const { 
+			if (i >= 0 && i < vertexCount && j >= 0 && j < vertexCount)
 				return (adjacencyMatrix[i][j] > 0.0f);
 			else
 				return false;
 		}
 
+		/** Zwraca odleglosc pomiedzy wierzcholkami i-j */
+		inline float getDist(int i, int j) const {
+			if(isEdge(i, j))
+				return adjacencyMatrix[i][j];
+			else
+				return 0.0f;
+		}
+
 		/** Zwraca liczbe wierzcholkow */
-		int V()
+		inline int V() const
 		{
 			return vertexCount;
 		}
 
 		/** Wylicza dlugosc cyklu Hamiltona */
 		float hamiltonLength(std::vector<int>& cycle);
+
+		/** Zapisuje graf do strumienia */
+		friend std::ostream& operator << (std::ostream& stream, const WMH::Graph& g);
 	};
-}; // namespace PSO
+}; // namespace WMH
