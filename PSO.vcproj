@@ -179,6 +179,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\SimulatedAnnealing.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -253,6 +257,10 @@
 				</File>
 				<File
 					RelativePath=".\TspSwarm.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Velocity.h"
 					>
 				</File>
 			</Filter>

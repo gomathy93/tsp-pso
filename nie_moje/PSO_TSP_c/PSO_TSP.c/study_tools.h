@@ -1,0 +1,11 @@
+void 				all_cycles(struct graph G);
+struct swarm 		determ_sequ(int size,int length);
+void 				display_topo(struct swarm sw);
+void 				landscape(FILE *file,int swarm_size,struct particle center);
+void 				map(FILE *file,struct particle pbest,int selection);
+int					nb_local_min(struct graph G);
+struct graph 		particle_visu(struct particle p) /* Just for visualization */;
+void 				save_SSM(FILE *file,struct swarm sw,struct sw_dist swd);
+void 				save_topo(FILE *file,struct swarm sw);
+struct swarm 		sw_f(struct swarm sw);
+void 				sw_distances(struct swarm sw);
