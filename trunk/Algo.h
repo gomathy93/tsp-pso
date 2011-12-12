@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 
+#include "Graph.h"
+
 namespace WMH {
 	/** Interfejs po ktorym maja dziedziczyc wszystkie 
 	  * algorytmy rozwiazywania problemu TSP 
