@@ -1,11 +1,8 @@
 #pragma once
 
 #include "stdafx.h"
-#include "Graph.h"
 
 //////////////////////////////////////////////////////////////////
-// Na razie nic z tego nie jest uzywane							//
-// to jest wg:													//
 // http://clerc.maurice.free.fr/pso/pso_tsp/ i tam pdf w zipie	//
 //////////////////////////////////////////////////////////////////
 namespace WMH {
@@ -25,12 +22,8 @@ namespace WMH {
 				this->j = j;
 			}
 
-			inline bool equal(const PointSwap& swap2) const {
-				return (swap2.i == i && swap2.j == j);
-			}
-
-			inline bool neg_equal(const PointSwap& swap2) const {
-				return (swap2.i == j && swap2.j == i);
+			inline bool operator == (const PointSwap& swap2) const {
+				return (swap2.i == i && swap2.j == j) || (swap2.i == j && swap2.j == i);
 			}
 		};
 
@@ -38,6 +31,8 @@ namespace WMH {
 		class Velocity {
 			std::vector<PointSwap>	elems;
 		public:
+			Velocity() {}
+
 			Velocity(const std::vector<PointSwap>& swaps) {
 				elems = swaps;
 			}
@@ -55,54 +50,41 @@ namespace WMH {
 			}
 
 			/** Negacja */
-			inline Velocity neg() {
-				Velocity negated(*this);
-				for(size_t i=0; i<elems.size(); i++)
-					std::swap(negated.elems[i].i, negated.elems[i].j);
-				return negated;
+			Velocity operator~() const {
+				std::vector<PointSwap> swaps;
+				for(int i=size()-1; i>=0; i--)
+					swaps.push_back(elems[i]);
+				return Velocity(swaps);
 			}
 
 			/** Tworzy sume logiczna dwoch predkosci (v + ~v == pusty)*/
-			Velocity add(const Velocity& v) {
-				return Velocity(v); // TODO: stub
-			}
-		};
-
-		/** Klasa reprezentujaca cykl Hamiltona (polozenie),
-			indeksowanie 0...N-1 dla N wierzcholkow */
-		class Position {
-
-			// zablokowany
-			Position() {}
-
-			std::vector<int>	indices;
-			const Graph*		g;
-		public:			
-			Position(const Graph* g) {
-				this->g = g;
-				indices.resize(g->V());
-				for(size_t i=0; i<indices.size(); i++)
-					indices[i] = i;
+			Velocity operator+(const Velocity& v) const {
+				Velocity added(*this); // TODO: stub
+				return added;
 			}
 
-			inline int operator[](int index) const {
-				return indices[index];
-			}
-
-			/** Pozycja + predkosc */
-			inline Position add(const Velocity& v) {
-				for(size_t i=0; i<v.size(); i++) {
-					PointSwap& swap = v[i];
-					std::swap(indices[swap.i], indices[swap.j]);
+			/** Mnozenie przez liczbe (dowolna zmiennoprzecinkowa) */
+			Velocity operator*(const float C) const {
+				if(C == 0.0f) // zwracamy pusty
+					return Velocity(); 
+				if(C > 0.0f && C < 1.0f) { // obcinamy do |cv|
+					if(size() == 0) return Velocity();
+					std::vector<PointSwap> swaps;
+					size_t treshold = static_cast<unsigned int>(floor(C * size())) + 1;
+					for(size_t i=0; i<treshold; i++)
+						swaps.push_back(elems[i]);
+					return Velocity(swaps);
 				}
-			}
-		
-			float cost() const {
-				float sum = 0.0f;
-				for(size_t i=0; i<indices.size()-1; i++) // TODO: dodac duzy koszt jak nie ma polaczenia
-					sum += g->getDist(indices[i], indices[i+1]);
-				sum += g->getDist(indices[indices.size()-1], indices[0]);
-				return sum;
+				if(C >= 1.0f) { // jesli C=5.2 to 5 razy dodajemy, raz obcinamy do |0.2*v|
+					Velocity vel;
+					int k = static_cast<int>(C);
+					for(int i=0; i<k; i++)
+						vel = vel + vel;
+					return vel * (C - k);
+				}
+				if(C < 0.0f) // to samo co w przypadku dodatniego C tylko z negacja
+					return ~(*this) * -C;
+				assert(0);
 			}
 		};
 	}; // namespace WMH
