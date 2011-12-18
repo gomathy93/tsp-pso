@@ -19,8 +19,20 @@ int main(int argc, char* argv[]) {
 	swaps.push_back(PSO::PointSwap(3, 4));
 	swaps.push_back(PSO::PointSwap(5, 6));
 	PSO::Velocity v(swaps);
-	PSO::Velocity neg_v = v.neg();
-	PSO::Velocity sum_v = v.add(neg_v); // powinno byc puste
+	PSO::Velocity neg_v = ~v;
+	PSO::Velocity sum_v = v + neg_v; // powinno byc puste
+	PSO::Velocity mul02_v = v * 0.2f; // mnozenie przez float
+	PSO::Velocity mul22 = v * 2.2f;
+	PSO::Velocity mul10 = v * 1.0f;
+	PSO::Velocity mul_02 = v * -0.2f;
+
+	const Graph g6(6, 10.0f);
+	PSO::Position pos1(&g6);
+	PSO::Position pos2(&g6);
+	PSO::Velocity pos_diff1 = pos1 - pos2;
+	PSO::Velocity pos_diff2 = pos2 - pos1;
+	PSO::Position pos3 = pos1 + pos_diff1;
+	PSO::Position pos4 = pos2 + pos_diff2;
 	// koniec nieuzywane
 	
 	std::vector<Graph> graphs;
