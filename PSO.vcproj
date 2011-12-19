@@ -256,6 +256,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Position.h"
+					>
+				</File>
+				<File
 					RelativePath=".\TspSwarm.h"
 					>
 				</File>

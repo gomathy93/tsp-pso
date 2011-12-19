@@ -58,8 +58,14 @@ namespace WMH {
 			}
 
 			/** Tworzy sume logiczna dwoch predkosci (v + ~v == pusty)*/
-			Velocity operator+(const Velocity& v) const {
-				Velocity added(*this); // TODO: stub
+			Velocity operator+(const Velocity& v) const { // TODO: czy to na pewno ma tak dzialac?
+				Velocity added(*this);
+				for(size_t i=0; i<v.size(); i++) {
+					if(added.size() > 0 && added.elems.back() == v[i])
+						added.elems.pop_back();
+					else
+						added.elems.push_back(v[i]);
+				}
 				return added;
 			}
 
@@ -76,10 +82,10 @@ namespace WMH {
 					return Velocity(swaps);
 				}
 				if(C >= 1.0f) { // jesli C=5.2 to 5 razy dodajemy, raz obcinamy do |0.2*v|
-					Velocity vel;
+					Velocity vel(*this);
 					int k = static_cast<int>(C);
 					for(int i=0; i<k; i++)
-						vel = vel + vel;
+						vel += vel;
 					return vel * (C - k);
 				}
 				if(C < 0.0f) // to samo co w przypadku dodatniego C tylko z negacja

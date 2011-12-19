@@ -6,6 +6,7 @@
 #include "SimulatedAnnealing.h"
 
 #include "Velocity.h"
+#include "Position.h"
 
 using namespace WMH;
 
@@ -21,10 +22,11 @@ int main(int argc, char* argv[]) {
 	PSO::Velocity v(swaps);
 	PSO::Velocity neg_v = ~v;
 	PSO::Velocity sum_v = v + neg_v; // powinno byc puste
-	PSO::Velocity mul02_v = v * 0.2f; // mnozenie przez float
+	PSO::Velocity mul02 = v * 0.2f; // mnozenie przez float
 	PSO::Velocity mul22 = v * 2.2f;
 	PSO::Velocity mul10 = v * 1.0f;
 	PSO::Velocity mul_02 = v * -0.2f;
+	PSO::Velocity sum = mul02 + mul22;
 
 	const Graph g6(6, 10.0f);
 	PSO::Position pos1(&g6);
