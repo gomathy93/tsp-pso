@@ -210,7 +210,15 @@
 					>
 				</File>
 				<File
+					RelativePath=".\Position.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\TspSwarm.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Velocity.cpp"
 					>
 				</File>
 			</Filter>

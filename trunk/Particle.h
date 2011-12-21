@@ -2,7 +2,8 @@
 
 #include "stdafx.h"
 
-#include "Features.h"
+#include "Position.h"
+#include "Velocity.h"
 #include "utils.h"
 
 namespace WMH {
@@ -12,7 +13,7 @@ namespace WMH {
 
 		class Particle {
 			/** Najlepsze znalezione rozwiazanie (przez ta czastke) */
-			Features	best;
+			Position	best;
 			/** Miara dopasowania najlepszego rozwiazania */
 			float		bestFit;
 			/** Wspolczynnik bezwladnosci */
@@ -23,9 +24,9 @@ namespace WMH {
 			/** Roj do ktorego przynalezy czastka */
 			TspSwarm*		swarm;
 			/** Pozycja czastki */
-			Features	position;
+			Position	position;
 			/** Predkosc czastki */
-			Features	speed;
+			Velocity	speed;
 			/** Tworzy czastke nieprzypisana do zadnego roju */
 			Particle() {
 				swarm = NULL;
