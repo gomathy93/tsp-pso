@@ -3,7 +3,7 @@
 #include "stdafx.h"
 
 #include "Particle.h"
-#include "Features.h"
+#include "Position.h"
 #include "Graph.h"
 #include "Algo.h"
 
@@ -24,7 +24,7 @@ namespace WMH {
 			/** List czastek */
 			std::vector<Particle> particles;
 			/** Najlepsze znalezione rozwiazanie (globalne) */
-			Features	best;
+			Position	best;
 			/** Miara dopasowania najlepszego rozwiazania */
 			float		bestFit;
 			/** Liczba iteracji ktora nie poprawila wyniku */
@@ -44,7 +44,7 @@ namespace WMH {
 			
 			/** Zwraca najlepsze rozwiazanie */
 			inline std::vector<int> getBestSolution() const {
-				return best.toPermut();
+				return best.getIndices();
 			}
 			
 			/** Zwraca nazwe algorytmu */

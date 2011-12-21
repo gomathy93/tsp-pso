@@ -50,48 +50,12 @@ namespace WMH {
 			}
 
 			/** Negacja */
-			Velocity operator~() const {
-				std::vector<PointSwap> swaps;
-				for(int i=size()-1; i>=0; i--)
-					swaps.push_back(elems[i]);
-				return Velocity(swaps);
-			}
-
+			Velocity operator~() const;
 			/** Tworzy sume logiczna dwoch predkosci (v + ~v == pusty)*/
-			Velocity operator+(const Velocity& v) const { // TODO: czy to na pewno ma tak dzialac?
-				Velocity added(*this);
-				for(size_t i=0; i<v.size(); i++) {
-					if(added.size() > 0 && added.elems.back() == v[i])
-						added.elems.pop_back();
-					else
-						added.elems.push_back(v[i]);
-				}
-				return added;
-			}
-
+			Velocity operator+(const Velocity& v) const;
+			Velocity& operator+=(const Velocity& v);
 			/** Mnozenie przez liczbe (dowolna zmiennoprzecinkowa) */
-			Velocity operator*(const float C) const {
-				if(C == 0.0f) // zwracamy pusty
-					return Velocity(); 
-				if(C > 0.0f && C < 1.0f) { // obcinamy do |cv|
-					if(size() == 0) return Velocity();
-					std::vector<PointSwap> swaps;
-					size_t treshold = static_cast<unsigned int>(floor(C * size())) + 1;
-					for(size_t i=0; i<treshold; i++)
-						swaps.push_back(elems[i]);
-					return Velocity(swaps);
-				}
-				if(C >= 1.0f) { // jesli C=5.2 to 5 razy dodajemy, raz obcinamy do |0.2*v|
-					Velocity vel(*this);
-					int k = static_cast<int>(C);
-					for(int i=0; i<k; i++)
-						vel += vel;
-					return vel * (C - k);
-				}
-				if(C < 0.0f) // to samo co w przypadku dodatniego C tylko z negacja
-					return ~(*this) * -C;
-				assert(0);
-			}
+			Velocity operator*(const float C) const;
 		};
 	}; // namespace WMH
 }; // namespace PSO
