@@ -17,26 +17,38 @@ namespace WMH {
 			int*	indices;
 			size_t	N;
 
-			inline size_t getVerticleIndex(int verticle) const {
-				for(size_t i=0; i<N; i++)
-					if(indices[i] == verticle)
-						return i;
-				assert(0);
-			}
+			/** Pobiera indeks gdzie znajduje sie wierzcholek o danym numerze na liscie */
+			size_t getVerticleIndex(int verticle) const;
+
+			/** Przypisuje zawartosc innej pozycji, 
+			  * Uzywana do konstruktora kopiujacego, operatora przypisania 
+			  */
+			void assign(const Position& p);
 		public:			
 			Position() {
 				indices = NULL;
 				N = 0;
 			}
 
+			Position(const Position& p) {
+				indices = NULL;
+				assign(p);
+			}
+
 			~Position() {
 				if(indices) delete [] indices;
 			}
 
+			/** Losuje zawartosc wektora polozenia */
 			void randomize(size_t size);
 
 			inline int operator[](int index) const {
 				return indices[index];
+			}
+
+			inline Position& operator=(const Position& p) {
+				assign(p);
+				return *this;
 			}
 
 			inline size_t size() const {
