@@ -4,9 +4,9 @@
 #include "TspSwarm.h"
 #include "utils.h"
 
-const float WMH::PSO::Particle::OMEGA = 0.75f;
-const float WMH::PSO::Particle::C1 = 1.5f;
-const float WMH::PSO::Particle::C2 = 1.5f;
+const float WMH::PSO::Particle::OMEGA = 1.5f;
+const float WMH::PSO::Particle::C1 = 0.25f;
+const float WMH::PSO::Particle::C2 = C1;
 
 void WMH::PSO::Particle::init(TspSwarm* swarm) {
 	this->swarm = swarm;
@@ -31,4 +31,9 @@ void WMH::PSO::Particle::update() {
 	// Zmiana polozenia i predkosci
 	speed = speed * OMEGA + (best - position) * C1 + (bestGlobal - position) * C2;
 	position += speed;
+
+	// TODO: debug
+	/*wchar_t debug_str[512];
+	wsprintf(debug_str, L"speed %d\r\n", speed.size());
+	OutputDebugStr(debug_str);*/
 }

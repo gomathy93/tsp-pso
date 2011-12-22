@@ -22,6 +22,17 @@ namespace WMH {
 				this->j = j;
 			}
 
+			PointSwap(const PointSwap& ps) {
+				i = ps.i;
+				j = ps.j;
+			}
+
+			inline PointSwap& operator=(const PointSwap& ps) {
+				i = ps.i;
+				j = ps.j;
+				return *this;
+			}
+
 			inline bool operator == (const PointSwap& swap2) const {
 				return (swap2.i == i && swap2.j == j) || (swap2.i == j && swap2.j == i);
 			}
@@ -39,6 +50,11 @@ namespace WMH {
 
 			Velocity(const Velocity& v2) {
 				elems = v2.elems;
+			}
+
+			inline Velocity& operator=(const Velocity& v2) {
+				elems = v2.elems;
+				return *this;
 			}
 
 			inline PointSwap operator[](int index) const {

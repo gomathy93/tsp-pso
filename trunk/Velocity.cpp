@@ -23,14 +23,14 @@ namespace WMH {
 
 		Velocity& Velocity::operator+=(const Velocity& v) {
 			// stara wersja 
-			/*for(size_t i=0; i<v.size(); i++) {
+			for(size_t i=0; i<v.size(); i++) {
 				if(size() > 0 && elems.back() == v[i])
 					elems.pop_back();
 				else
 					elems.push_back(v[i]);
 			}
-			return *this;*/
-			for(size_t i=0; i<v.size(); i++) {
+			return *this;
+			/*for(size_t i=0; i<v.size(); i++) {
 				std::vector<PointSwap>::iterator it = elems.begin(), end = elems.end();
 				bool found = false;
 				while(it != end) {
@@ -43,7 +43,7 @@ namespace WMH {
 				}
 				if(!found) elems.push_back(v[i]);
 			}
-			return *this;
+			return *this;*/
 		}
 
 		/** Mnozenie przez liczbe (dowolna zmiennoprzecinkowa) */

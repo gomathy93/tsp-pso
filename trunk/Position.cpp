@@ -8,7 +8,32 @@
 
 namespace WMH {
 	namespace PSO {
+
+		/** Pobiera indeks gdzie znajduje sie wierzcholek o danym numerze na liscie */
+		size_t Position::getVerticleIndex(int verticle) const {
+			// TODO: to mozna zoptymalizowac do O(1)
+			for(size_t i=0; i<N; i++)
+				if(indices[i] == verticle)
+					return i;
+			assert(0);
+		}
+
+		/** Przypisuje zawartosc innej pozycji, 
+		  * Uzywana do konstruktora kopiujacego, operatora przypisania 
+		  */
+		void Position::assign(const Position& p) {
+			if(indices) delete [] indices;
+			if(p.indices) {
+				indices = new int[p.N];
+				memcpy(indices, p.indices, sizeof(int) * p.N);
+				N = p.N;
+			} else {
+				indices = NULL;
+				N = 0;
+			}
+		}
 		
+		/** Losuje zawartosc wektora polozenia */
 		void Position::randomize(size_t N) {
 				if(indices) delete [] indices;
 				indices = new int[N];
@@ -52,7 +77,6 @@ namespace WMH {
 		/** Zwraca koszt sciezki wg wag w grafie */
 		float Position::cost(const Graph* g) const {
 			if(N == 0) return 0.0f;
-
 			float sum = 0.0f;
 			for(size_t i=0; i<N-1; i++) // TODO: dodac duzy koszt jesli nie ma polaczenia
 				sum += g->getDist(indices[i], indices[i+1]);
