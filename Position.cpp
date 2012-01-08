@@ -61,20 +61,27 @@ namespace WMH {
 			if(size() != p2.size()) return Velocity();
 			std::list<PointSwap> swaps;
 			int* indCopy = new int[N];
+			
 			memcpy(indCopy, indices, N * sizeof(int));
 			for(size_t i=0; i<N-1; i++) {
-				if(indCopy[i] != p2[i]) {
+				if(indices[i] != p2[i]) {
 					size_t i2 = getVerticleIndex(p2[i]);
-					indCopy[i2] = indCopy[i];
-					indCopy[i] = p2[i];
-					swaps.push_front(PointSwap(indices[i], p2[i]));
+					
+					int temp1 = indices[i2];
+
+					indices[i2] = indices[i];
+					indices[i]=temp1;
+					
+					swaps.push_front(PointSwap(indices[i2], indices[i]));
 				}
 			}
+			memcpy(indices, indCopy, N * sizeof(int));
 			delete [] indCopy;
-			swaps.reverse();
 			return Velocity(std::vector<PointSwap>(swaps.begin(), swaps.end()));
+		
 		}
-	
+
+			
 		/** Zwraca koszt sciezki wg wag w grafie */
 		float Position::cost(const Graph* g) const {
 			if(N == 0) return 0.0f;
