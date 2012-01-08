@@ -16,10 +16,6 @@ namespace WMH {
 			Position	best;
 			/** Miara dopasowania najlepszego rozwiazania */
 			float		bestFit;
-			/** Wspolczynnik bezwladnosci */
-			static const float OMEGA;
-			/** Stale przyspieszenia */
-			static const float C1, C2;
 
 			void assign(const Particle& p2) {
 				best = p2.best;
@@ -29,6 +25,12 @@ namespace WMH {
 				speed = p2.speed;
 			}
 		public:
+			// TODO przeniesc do private, dodac const
+			/** Wspolczynnik bezwladnosci */ 
+			static float OMEGA;
+			/** Stale przyspieszenia */
+			static float C1, C2;
+
 			/** Roj do ktorego przynalezy czastka */
 			TspSwarm*	swarm;
 			/** Pozycja czastki */

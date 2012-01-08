@@ -58,6 +58,7 @@ namespace WMH {
 			}
 
 			inline Position& operator=(const Position& p) {
+				if (this == &p) return *this;
 				assign(p);
 				return *this;
 			}
