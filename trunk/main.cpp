@@ -30,21 +30,35 @@ int main(int argc, char* argv[]) {
 
 	PSO::Position pos1;
 	PSO::Position pos2;
-	PSO::Velocity pos_diff1 = pos1 - pos2;
-	PSO::Velocity pos_diff2 = pos2 - pos1;
-	PSO::Position pos3 = pos1; pos3 += pos_diff1;
-	PSO::Position pos4 = pos2; pos2 += pos_diff2;
+	pos1.randomize(5);
+	pos2.randomize(5);
+	//pos1[0] = 3; pos1[1] = 1; pos1[2] = 4; pos1[3] = 0; pos1[4] = 2;
+	//pos2[0] = 1; pos2[1] = 3; pos2[2] = 2; pos2[3] = 4; pos2[4] = 0;
+	PSO::Velocity v1 = pos1 - pos2;
+	PSO::Velocity v2 = pos2 - pos1;
+	std::cout << "p1: " << pos1;
+	std::cout << "p2: " << pos2;
+	PSO::Position pos11 = pos2; pos11 += v1;
+	PSO::Position pos22 = pos1; pos22 += v2;
+	std::cout << "p1: " << pos11;
+	std::cout << "p2: " << pos22;
+
+
 	// koniec nieuzywane
+
+	std::ofstream fout("50-1.txt");
+	fout << Graph(50, 10.0f) << std::endl;
+	fout.close();
 	
 	std::vector<Graph> graphs;
-	graphs.push_back(Graph(25, 10.0f));
-	graphs.push_back(Graph(50, 10.0f));
-	graphs.push_back(Graph(500, 10.0f));
-	graphs.push_back(Graph(1000, 10.0f));
+	graphs.push_back(Graph("25-1.txt"));
+	graphs.push_back(Graph("25-2.txt"));
+	graphs.push_back(Graph("25-3.txt"));
+	//graphs.push_back(Graph("50-1.txt"));
 	
 	std::vector<iAlgo*>	algos;
 	for(unsigned int i=0; i<graphs.size(); i++) {
-		algos.push_back(new PSO::TspSwarm(&graphs[i], graphs[i].V()));
+		algos.push_back(new PSO::TspSwarm(&graphs[i], 16/*graphs[i].V()*/));
 		algos.push_back(new RS::RandomSearch(&graphs[i]));
 		algos.push_back(new SA::SimulatedAnnealing(&graphs[i]));
 	}

@@ -62,7 +62,7 @@ namespace WMH {
 			std::list<PointSwap> swaps;
 			int* indCopy = new int[N];
 			memcpy(indCopy, indices, N * sizeof(int));
-			for(size_t i=0; i<N; i++) {
+			for(size_t i=0; i<N-1; i++) {
 				if(indCopy[i] != p2[i]) {
 					size_t i2 = getVerticleIndex(p2[i]);
 					indCopy[i2] = indCopy[i];
@@ -72,6 +72,8 @@ namespace WMH {
 			}
 			delete [] indCopy;
 			return Velocity(std::vector<PointSwap>(swaps.begin(), swaps.end()));
+
+
 		}
 	
 		/** Zwraca koszt sciezki wg wag w grafie */

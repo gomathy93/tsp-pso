@@ -39,6 +39,17 @@ namespace WMH {
 			copyMatrix(g2);
 		}
 
+		/** Wczytuje graf z pliku */
+		Graph(const char* filename) {
+			std::ifstream fin(filename);
+			vertexCount = 0;
+			adjacencyMatrix = NULL;
+			if(fin.good()) {
+				fin >> *this;
+				fin.close();
+			}
+		}
+
 		/** To musi byc zadeklarowane zeby uniknac glupich bledow */
 		Graph& operator = (const Graph& g2)	{
 			if (this == &g2) 
@@ -95,5 +106,16 @@ namespace WMH {
 
 		/** Zapisuje graf do strumienia */
 		friend std::ostream& operator << (std::ostream& stream, const WMH::Graph& g);
+
+		/** Wczytuje graf ze strumienia */
+		friend std::istream& operator >> (std::istream& stream, WMH::Graph& g) {
+			g.freeMatrix();
+			stream >> g.vertexCount;
+			g.allocateMatrix(g.vertexCount);
+			for(int x=0; x<g.vertexCount; x++)
+				for(int y=0; y<g.vertexCount; y++)
+					stream >> g.adjacencyMatrix[y][x];
+			return stream;
+		}
 	};
 }; // namespace WMH

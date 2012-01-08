@@ -8,7 +8,7 @@ void WMH::Graph::allocateMatrix(int V) {
 	for (int i = 0; i < vertexCount; i++) {
 		adjacencyMatrix[i] = new float[vertexCount];
 		for (int j = 0; j < vertexCount; j++)
-			adjacencyMatrix[i][j] = 0.0f;
+			adjacencyMatrix[i][j] = 99999.0f;
 	}
 }
 

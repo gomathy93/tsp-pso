@@ -46,6 +46,11 @@ namespace WMH {
 				return indices[index];
 			}
 
+			// TODO: temp, remove
+			inline int& operator[](int index) {
+				return indices[index];
+			}
+
 			inline Position& operator=(const Position& p) {
 				assign(p);
 				return *this;
@@ -65,6 +70,14 @@ namespace WMH {
 			Velocity operator-(const Position& p2) const;
 			/** Zwraca koszt sciezki wg wag w grafie */
 			float cost(const Graph* g) const;
+
+			/** Zapisuje pozycje do strumienia */
+			friend std::ostream& operator << (std::ostream& stream, const WMH::PSO::Position& p) {
+				for(size_t i=0; i<p.N; i++)
+					stream << p[i] << ' ';
+				stream << std::endl;
+				return stream;
+			}
 		};
 	}; // namespace WMH
 }; // namespace PSO
