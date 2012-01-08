@@ -52,8 +52,7 @@ namespace WMH {
 
 		/** To musi byc zadeklarowane zeby uniknac glupich bledow */
 		Graph& operator = (const Graph& g2)	{
-			if (this == &g2) 
-				return *this;
+			if (this == &g2) return *this;
 			freeMatrix();
 			copyMatrix(g2);
 			return *this;

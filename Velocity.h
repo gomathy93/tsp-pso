@@ -53,6 +53,7 @@ namespace WMH {
 			}
 
 			inline Velocity& operator=(const Velocity& v2) {
+				if (this == &v2) return *this;
 				elems = v2.elems;
 				return *this;
 			}

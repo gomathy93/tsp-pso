@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 	
 	std::vector<iAlgo*>	algos;
 	for(unsigned int i=0; i<graphs.size(); i++) {
-		algos.push_back(new PSO::TspSwarm(&graphs[i], 16/*graphs[i].V()*/));
+		algos.push_back(new PSO::TspSwarm(&graphs[i], graphs[i].V()));
 		algos.push_back(new RS::RandomSearch(&graphs[i]));
 		algos.push_back(new SA::SimulatedAnnealing(&graphs[i]));
 	}

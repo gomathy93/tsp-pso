@@ -18,6 +18,16 @@ namespace WMH {
 			TspSwarm() {}
 			/** Czas obliczen w ms */
 			DWORD computationTime;
+
+			void assign(const TspSwarm& t2) {
+				NOCHANGE_MAX = t2.NOCHANGE_MAX;
+				computationTime = t2.computationTime;
+				g = t2.g;
+				particles = t2.particles;
+				best = t2.best;
+				bestFit = t2.bestFit;
+				noChange = t2.noChange;
+			}
 		protected:
 			/** Graf dla ktorego przeprowadzane sa obliczenia */
 			const Graph*	g;
@@ -30,9 +40,18 @@ namespace WMH {
 			/** Liczba iteracji ktora nie poprawila wyniku */
 			int			noChange;
 		public:
-
 			/** Tworzy roj rozwiazujacy TSP dla grafu g */
 			TspSwarm(const Graph* g, unsigned int particlesCount, int maxNoChange = 1000);
+			/** Konstruktor kopiujacy */
+			TspSwarm(const TspSwarm& t2) {
+				assign(t2);
+			}
+			/** Operator przypisania */
+			inline TspSwarm& operator=(const TspSwarm& t2) {
+				if (this == &t2) return *this;
+				assign(t2);
+				return *this;
+			}
 			
 			/** Rozpoczyna obliczenia */
 			void compute();

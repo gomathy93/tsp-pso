@@ -29,6 +29,7 @@ namespace WMH {
 				else
 					elems.push_back(v[i]);
 			}
+
 			return *this;
 			/*for(size_t i=0; i<v.size(); i++) { // wg Romana
 				std::vector<PointSwap>::iterator it = elems.begin(), end = elems.end();
