@@ -20,9 +20,17 @@ namespace WMH {
 			static const float OMEGA;
 			/** Stale przyspieszenia */
 			static const float C1, C2;
+
+			void assign(const Particle& p2) {
+				best = p2.best;
+				bestFit = p2.bestFit;
+				swarm = p2.swarm;
+				position = p2.position;
+				speed = p2.speed;
+			}
 		public:
 			/** Roj do ktorego przynalezy czastka */
-			TspSwarm*		swarm;
+			TspSwarm*	swarm;
 			/** Pozycja czastki */
 			Position	position;
 			/** Predkosc czastki */
@@ -32,6 +40,17 @@ namespace WMH {
 				swarm = NULL;
 				bestFit = MAX_FLOAT;
 			}
+			/** Konstruktor kopiujacy */
+			Particle(const Particle& p2) {
+				assign(p2);
+			}
+			/** Operator przypisania */
+			Particle& operator=(const Particle& p2) {
+				if (this == &p2) return *this;
+				assign(p2);
+				return *this;
+			}
+
 			/** Tworzy czastke przynalezaca do roju swarm */
 			void init(TspSwarm* swarm);
 			/** Aktualizuje predkosc i polozenie w kolejnej iteracji oraz najlepsze wyniki */

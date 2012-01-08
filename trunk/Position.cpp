@@ -71,9 +71,8 @@ namespace WMH {
 				}
 			}
 			delete [] indCopy;
+			swaps.reverse();
 			return Velocity(std::vector<PointSwap>(swaps.begin(), swaps.end()));
-
-
 		}
 	
 		/** Zwraca koszt sciezki wg wag w grafie */
