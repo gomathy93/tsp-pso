@@ -28,12 +28,26 @@ int main(int argc, char* argv[]) {
 	PSO::Velocity mul_02 = v * -0.2f;
 	PSO::Velocity sum = mul02 + mul22;
 
-	PSO::Position pos1(5);
-	PSO::Position pos2(5);
-	//pos1[0] = 3; pos1[1] = 1; pos1[2] = 4; pos1[3] = 0; pos1[4] = 2;
-	//pos2[0] = 1; pos2[1] = 3; pos2[2] = 2; pos2[3] = 4; pos2[4] = 0;
+	PSO::Position pos1;
+	PSO::Position pos2;
+	pos1.randomize(10);
+	pos2.randomize(10);
+	//pos1[0] = 1; pos1[1] = 0; pos1[2] = 2; pos1[3] = 4; pos1[4] = 3;
+	//pos2[0] = 2; pos2[1] = 4; pos2[2] = 0; pos2[3] = 3; pos2[4] = 1;
 	PSO::Velocity v1 = pos1 - pos2;
 	PSO::Velocity v2 = pos2 - pos1;
+
+	std::cout << "vel1 " <<std::endl;
+	for(size_t x =0; x < v1.size();x++)
+		std::cout<< "(" << v1[x].i << ","<<v1[x].j<<") ";
+	std::cout<<std::endl;
+	
+	std::cout << "val2 " <<std::endl;
+	for(size_t xx =0; xx < v2.size();xx++)
+		std::cout<< "(" << v2[xx].i << ","<<v2[xx].j<<") ";
+	std::cout<<std::endl;
+	
+		
 	std::cout << "p1: " << pos1;
 	std::cout << "p2: " << pos2;
 	PSO::Position pos11 = pos2; pos11 += v1;

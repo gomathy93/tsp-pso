@@ -24,7 +24,8 @@ namespace WMH {
 			  * Uzywana do konstruktora kopiujacego, operatora przypisania 
 			  */
 			void assign(const Position& p);
-		public:			
+		public:		
+			
 			Position() {
 				indices = NULL;
 				N = 0;
@@ -75,6 +76,8 @@ namespace WMH {
 			Velocity operator-(const Position& p2) const;
 			/** Zwraca koszt sciezki wg wag w grafie */
 			float cost(const Graph* g) const;
+
+			bool greaterThan(const Position& p2)const;
 
 			/** Zapisuje pozycje do strumienia */
 			friend std::ostream& operator << (std::ostream& stream, const Position& p);
