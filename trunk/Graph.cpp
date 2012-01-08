@@ -60,3 +60,13 @@ std::ostream& WMH::operator << (std::ostream& stream, const WMH::Graph& g) {
 	}
 	return stream;
 }
+
+std::istream& WMH::operator >> (std::istream& stream, WMH::Graph& g) {
+	g.freeMatrix();
+	stream >> g.vertexCount;
+	g.allocateMatrix(g.vertexCount);
+	for(int x=0; x<g.vertexCount; x++)
+		for(int y=0; y<g.vertexCount; y++)
+			stream >> g.adjacencyMatrix[y][x];
+	return stream;
+}

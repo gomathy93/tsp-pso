@@ -1,3 +1,5 @@
+#include "stdinc.h"
+
 /*
 best_hood_type=1;	// 0 = use best neighbour; 1 = use best neighbour's previous best
 BB_option=1; // 0 = use an average value, 1= use the min value. Cf BB_update() and BB_use()

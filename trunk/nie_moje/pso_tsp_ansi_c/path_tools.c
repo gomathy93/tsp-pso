@@ -1,3 +1,4 @@
+#include "stdinc.h"
 
 /*------------------------------------------------------------------- DISPLAY_PATH */
 void display_path(struct path path) 
