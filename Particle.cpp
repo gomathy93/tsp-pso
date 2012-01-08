@@ -5,8 +5,8 @@
 #include "utils.h"
 
 const float WMH::PSO::Particle::OMEGA = 1.5f;
-const float WMH::PSO::Particle::C1 = 0.25f;
-const float WMH::PSO::Particle::C2 = C1;
+const float WMH::PSO::Particle::C1 = 0.5f;
+const float WMH::PSO::Particle::C2 = 0.2f;
 
 void WMH::PSO::Particle::init(TspSwarm* swarm) {
 	this->swarm = swarm;
