@@ -1,3 +1,5 @@
+#include "stdinc.h"
+
 /*------------------------------------------------------------------- INIT_PARTICLE */
 struct particle init_particle(struct graph G)
 {

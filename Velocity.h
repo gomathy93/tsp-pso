@@ -72,6 +72,9 @@ namespace WMH {
 			Velocity& operator+=(const Velocity& v);
 			/** Mnozenie przez liczbe (dowolna zmiennoprzecinkowa) */
 			Velocity operator*(const float C) const;
+
+			/** Zapisuje liste podmian do strumienia */
+			friend std::ostream& operator << (std::ostream& stream, const Velocity& v);
 		};
 	}; // namespace WMH
 }; // namespace PSO

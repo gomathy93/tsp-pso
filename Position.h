@@ -30,6 +30,11 @@ namespace WMH {
 				N = 0;
 			}
 
+			Position(size_t N) {
+				indices = NULL;
+				randomize(N);
+			}
+
 			Position(const Position& p) {
 				indices = NULL;
 				assign(p);
@@ -72,12 +77,7 @@ namespace WMH {
 			float cost(const Graph* g) const;
 
 			/** Zapisuje pozycje do strumienia */
-			friend std::ostream& operator << (std::ostream& stream, const WMH::PSO::Position& p) {
-				for(size_t i=0; i<p.N; i++)
-					stream << p[i] << ' ';
-				stream << std::endl;
-				return stream;
-			}
+			friend std::ostream& operator << (std::ostream& stream, const Position& p);
 		};
 	}; // namespace WMH
 }; // namespace PSO

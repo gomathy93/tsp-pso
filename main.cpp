@@ -28,10 +28,8 @@ int main(int argc, char* argv[]) {
 	PSO::Velocity mul_02 = v * -0.2f;
 	PSO::Velocity sum = mul02 + mul22;
 
-	PSO::Position pos1;
-	PSO::Position pos2;
-	pos1.randomize(5);
-	pos2.randomize(5);
+	PSO::Position pos1(5);
+	PSO::Position pos2(5);
 	//pos1[0] = 3; pos1[1] = 1; pos1[2] = 4; pos1[3] = 0; pos1[4] = 2;
 	//pos2[0] = 1; pos2[1] = 3; pos2[2] = 2; pos2[3] = 4; pos2[4] = 0;
 	PSO::Velocity v1 = pos1 - pos2;
@@ -43,9 +41,7 @@ int main(int argc, char* argv[]) {
 	std::cout << "p1: " << pos11;
 	std::cout << "p2: " << pos22;
 
-
 	// koniec nieuzywane
-
 	std::ofstream fout("50-1.txt");
 	fout << Graph(50, 10.0f) << std::endl;
 	fout.close();

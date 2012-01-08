@@ -1,3 +1,5 @@
+#include "stdinc.h"
+
 /*------------------------------------------------------------------- DISPLAY_DISTANCES */
 void display_distances(struct swarm sw)
 {

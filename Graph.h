@@ -93,7 +93,7 @@ namespace WMH {
 			if(isEdge(i, j))
 				return adjacencyMatrix[i][j];
 			else
-				return 0.0f;
+				return 0.0f; // TODO: dodac duzy koszt jesli nie ma polaczenia, na razie wszedzie sa
 		}
 
 		/** Zwraca liczbe wierzcholkow */
@@ -108,14 +108,6 @@ namespace WMH {
 		friend std::ostream& operator << (std::ostream& stream, const WMH::Graph& g);
 
 		/** Wczytuje graf ze strumienia */
-		friend std::istream& operator >> (std::istream& stream, WMH::Graph& g) {
-			g.freeMatrix();
-			stream >> g.vertexCount;
-			g.allocateMatrix(g.vertexCount);
-			for(int x=0; x<g.vertexCount; x++)
-				for(int y=0; y<g.vertexCount; y++)
-					stream >> g.adjacencyMatrix[y][x];
-			return stream;
-		}
+		friend std::istream& operator >> (std::istream& stream, WMH::Graph& g);
 	};
 }; // namespace WMH

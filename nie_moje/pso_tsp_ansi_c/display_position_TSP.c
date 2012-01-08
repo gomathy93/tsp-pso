@@ -1,3 +1,5 @@
+#include "stdinc.h"
+
 /*------------------------------------------------------------------- DISPLAY_POSITION */
 void display_position(struct particle p,int type)
 {

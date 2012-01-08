@@ -80,10 +80,18 @@ namespace WMH {
 		float Position::cost(const Graph* g) const {
 			if(N == 0) return 0.0f;
 			float sum = 0.0f;
-			for(size_t i=0; i<N-1; i++) // TODO: dodac duzy koszt jesli nie ma polaczenia
+			for(size_t i=0; i<N-1; i++) // TODO: dodac duzy koszt jesli nie ma polaczenia, na razie wszedzie sa
 				sum += g->getDist(indices[i], indices[i+1]);
 			sum += g->getDist(indices[N-1], indices[0]);
 			return sum;
+		}
+
+		/** Zapisuje pozycje do strumienia */
+		std::ostream& operator << (std::ostream& stream, const Position& p) {
+			for(size_t i=0; i<p.N; i++)
+				stream << p[i] << ' ';
+			stream << std::endl;
+			return stream;
 		}
 	}; // namespace WMH
 }; // namespace PSO

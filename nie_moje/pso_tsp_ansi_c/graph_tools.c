@@ -1,3 +1,4 @@
+#include "stdinc.h"
 
 /*------------------------------------------------------------------- 	CHECK_HAMILTON_CYCLE */
 int check_Hamilton_cycle(struct graph G)
@@ -99,10 +100,10 @@ for (i=0;i<G.N;i++)
 		{
 		if (j!=i)
 			{
-			Gt.l_max=MAX(G.v[i][j],Gt.l_max);
+			Gt.l_max=max(G.v[i][j],Gt.l_max);
 			if (G.v[i][j]>=0)  
 				{
-				Gt.l_min=MIN(G.v[i][j],Gt.l_min); /* Remember ... -1 is a special value = no arc */
+				Gt.l_min=min(G.v[i][j],Gt.l_min); /* Remember ... -1 is a special value = no arc */
 				Gt.n_edge=Gt.n_edge+1;
 				}
 			}

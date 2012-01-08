@@ -21,8 +21,8 @@ namespace WMH {
 			return added;
 		}
 
-		Velocity& Velocity::operator+=(const Velocity& v) {
-			// stara wersja 
+		Velocity& Velocity::operator+=(const Velocity& v) { // TODO: czy to dobrze dziala?
+			// stara wersja wg mnie
 			for(size_t i=0; i<v.size(); i++) {
 				if(size() > 0 && elems.back() == v[i])
 					elems.pop_back();
@@ -30,7 +30,7 @@ namespace WMH {
 					elems.push_back(v[i]);
 			}
 			return *this;
-			/*for(size_t i=0; i<v.size(); i++) {
+			/*for(size_t i=0; i<v.size(); i++) { // wg Romana
 				std::vector<PointSwap>::iterator it = elems.begin(), end = elems.end();
 				bool found = false;
 				while(it != end) {
@@ -68,6 +68,14 @@ namespace WMH {
 			if(C < 0.0f) // to samo co w przypadku dodatniego C tylko z negacja
 				return ~(*this) * -C;
 			assert(0);
+		}
+
+		/** Zapisuje liste podmian do strumienia */
+		std::ostream& operator << (std::ostream& stream, const Velocity& v) {
+			for(size_t i=0; i<v.size(); i++)
+				stream << '(' << v[i].i << ',' << v[i].j << ') ';
+			stream << std::endl;
+			return stream;
 		}
 	}; // namespace WMH
 }; // namespace PSO

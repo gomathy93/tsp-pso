@@ -1,3 +1,4 @@
+#include "stdinc.h"
 
 /*------------------------------------------------------------------- F */
 float f(struct particle p,int rank1,int rank2) // Function to minimize 
