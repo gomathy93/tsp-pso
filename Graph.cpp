@@ -43,7 +43,7 @@ float WMH::Graph::hamiltonLength(std::vector<int>& cycle) const {
 
 	float dist = 0.0f;
 	for(int i=0; i<vertexCount-1; i++) {
-		if(adjacencyMatrix[cycle[i]][cycle[i+1]] == 0.0f) return MAX_FLOAT; // brak sciezki
+		if(adjacencyMatrix[cycle[i]][cycle[i+1]] == 0.0f) return MAX_FLOAT; // brak sciezki, TODO: uwaga, to zaklada ze 0 = brak sciezki, nie zmieniac tego na razie
 		dist += adjacencyMatrix[cycle[i]][cycle[i+1]];
 	}
 	if(adjacencyMatrix[cycle[vertexCount-1]][cycle[0]] == 0.0f)	return MAX_FLOAT; // brak sciezki

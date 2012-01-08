@@ -4,9 +4,10 @@
 #include "TspSwarm.h"
 #include "utils.h"
 
-const float WMH::PSO::Particle::OMEGA = 0.7f;
-const float WMH::PSO::Particle::C1 = 0.5f;
-const float WMH::PSO::Particle::C2 = 0.25f;
+// TODO dodac const
+float WMH::PSO::Particle::OMEGA = 1.5f;
+float WMH::PSO::Particle::C1 = 0.5f;
+float WMH::PSO::Particle::C2 = 0.2f;
 
 void WMH::PSO::Particle::init(TspSwarm* swarm) {
 	this->swarm = swarm;
@@ -22,6 +23,10 @@ void WMH::PSO::Particle::update() {
 		swarm->best = position;
 		swarm->bestFit = fit;
 		swarm->noChange = 0;
+		// TODO debug
+		/*wchar_t debug_str[512];
+		wsprintf(debug_str, L"new best %d\r\n", (int)fit);
+		OutputDebugStringW(debug_str);*/
 	}
 	if(fit < bestFit || best.size() == 0) {
 		best = position;
@@ -33,7 +38,7 @@ void WMH::PSO::Particle::update() {
 	position += speed;
 
 	// TODO: debug
-	wchar_t debug_str[512];
+	/*wchar_t debug_str[512];
 	wsprintf(debug_str, L"speed %d\r\n", speed.size());
-	OutputDebugStringW(debug_str);
+	OutputDebugStringW(debug_str);*/
 }

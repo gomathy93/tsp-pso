@@ -56,9 +56,6 @@ int main(int argc, char* argv[]) {
 	std::cout << "p2: " << pos22;
 
 	// koniec nieuzywane
-	std::ofstream fout("50-1.txt");
-	fout << Graph(50, 10.0f) << std::endl;
-	fout.close();
 	
 	std::vector<Graph> graphs;
 	graphs.push_back(Graph("25-1.txt"));
@@ -66,9 +63,22 @@ int main(int argc, char* argv[]) {
 	graphs.push_back(Graph("25-3.txt"));
 	//graphs.push_back(Graph("50-1.txt"));
 	
+	// testy wartosci parametrow
+	for(int j=0; j<100; j++) {
+		PSO::TspSwarm alg(&graphs[0], graphs[0].V());
+		PSO::Particle::C1 = randf(-2.5, 2.5);
+		PSO::Particle::C2 = randf(-2.5, 2.5);
+		PSO::Particle::OMEGA = randf(-2.5, 2.5);
+		alg.compute();
+		std::cout << "C1: " << PSO::Particle::C1 << 
+					" C2: " << PSO::Particle::C2 << 
+					" OMEGA: " << PSO::Particle::OMEGA <<
+					" cost: " << alg.getBestCost() << std::endl;
+	}
+
 	std::vector<iAlgo*>	algos;
 	for(unsigned int i=0; i<graphs.size(); i++) {
-		algos.push_back(new PSO::TspSwarm(&graphs[i], graphs[i].V()));
+		algos.push_back(new PSO::TspSwarm(&graphs[i], 5));
 		algos.push_back(new RS::RandomSearch(&graphs[i]));
 		algos.push_back(new SA::SimulatedAnnealing(&graphs[i]));
 	}
