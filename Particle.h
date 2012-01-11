@@ -13,7 +13,7 @@ namespace WMH {
 
 		class Particle {
 			/** Najlepsze znalezione rozwiazanie (przez ta czastke) */
-			Position	best;
+			//Position	best;
 			/** Miara dopasowania najlepszego rozwiazania */
 			float		bestFit;
 
@@ -30,6 +30,8 @@ namespace WMH {
 			static float OMEGA;
 			/** Stale przyspieszenia */
 			static float C1, C2;
+
+			Position	best;
 
 			/** Roj do ktorego przynalezy czastka */
 			TspSwarm*	swarm;
