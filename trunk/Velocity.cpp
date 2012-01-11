@@ -28,20 +28,20 @@ namespace WMH {
 			}
 
 			return *this;
-			/*for(size_t i=0; i<v.size(); i++) { // wg Romana
-				std::vector<PointSwap>::iterator it = elems.begin(), end = elems.end();
-				bool found = false;
-				while(it != end) {
-					if(*it == v[i]) {
-						elems.erase(it);
-						found = true;
-						break;
-					}
-					++it;
-				}
-				if(!found) elems.push_back(v[i]);
-			}
-			return *this;*/
+			//for(size_t i=0; i<v.size(); i++) { // wg Romana
+			//	std::vector<PointSwap>::iterator it = elems.begin(), end = elems.end();
+			//	bool found = false;
+			//	while(it != end) {
+			//		if(*it == v[i]) {
+			//			elems.erase(it);
+			//			found = true;
+			//			break;
+			//		}
+			//		++it;
+			//	}
+			//	if(!found) elems.push_back(v[i]);
+			//}
+			//return *this;
 		}
 
 		/** Mnozenie przez liczbe (dowolna zmiennoprzecinkowa) */

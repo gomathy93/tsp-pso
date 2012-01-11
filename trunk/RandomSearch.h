@@ -42,6 +42,7 @@ namespace WMH {
 				best = solution;
 
 				while(noChange < NOCHANGE_MAX) {
+
 					noChange++;
 					std::swap(solution[rand()%g->V()], solution[rand()%g->V()]);
 					float cost = g->hamiltonLength(solution);
@@ -50,6 +51,7 @@ namespace WMH {
 						bestCost = cost;
 						best = solution;
 						noChange = 0;
+
 					}
 				}
 				computationTime = GetTickCount() - computationTime;
