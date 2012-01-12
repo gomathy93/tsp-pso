@@ -9,6 +9,13 @@
 
 namespace WMH {
 	namespace PSO {
+		// Wartosci domyslne
+		static const float DEF_C1 = 0.5f;
+		static const float DEF_C2 = 0.7f;
+		static const float DEF_OMEGA = 1.2f;
+		static const int DEF_REHOPE = 200; // aby tego nie robic ustawic ten parametr na wysoka wartosc
+		static const int DEF_MAXNOCHANGE = 1000;
+
 		/** Klasa reprezentujaca roj */
 		class TspSwarm : public iAlgo {
 			friend class Particle;
@@ -39,9 +46,13 @@ namespace WMH {
 			float		bestFit;
 			/** Liczba iteracji ktora nie poprawila wyniku */
 			int			noChange;
+			/** Ogólna liczba iteracji */
+			int			iter;
 		public:
 			/** Tworzy roj rozwiazujacy TSP dla grafu g */
-			TspSwarm(const Graph* g, unsigned int particlesCount, int maxNoChange = 1000);
+			TspSwarm(const Graph* g, int particlesCount, 
+				float C1 = DEF_C1, float C2 = DEF_C2, float omega = DEF_OMEGA, 
+				int particleRehope = DEF_REHOPE, int maxNoChange = DEF_MAXNOCHANGE);
 			/** Konstruktor kopiujacy */
 			TspSwarm(const TspSwarm& t2) {
 				assign(t2);

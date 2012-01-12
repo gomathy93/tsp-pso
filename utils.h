@@ -11,5 +11,5 @@ namespace WMH {
 		return min + randf()*(max - min);
 	}
 
-	static const float MAX_FLOAT = 99999999.9999f;
+	static const float MAX_FLOAT = 9999;
 }; // namespace PSO

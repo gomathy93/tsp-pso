@@ -23,25 +23,29 @@ namespace WMH {
 
 		Velocity& Velocity::operator+=(const Velocity& v) { // TODO: czy to dobrze dziala?
 			// stara wersja wg mnie
-			for(size_t i=0; i<v.size(); i++) {
-				elems.push_back(v[i]);
+			/*for(size_t i=0; i<v.size(); i++) {
+				if(size() > 0 && elems.back() == v[i])
+					elems.pop_back();
+				else
+					elems.push_back(v[i]);
 			}
 
+			return *this;*/
+			// wg Romana
+			for(size_t i=0; i<v.size(); i++) {
+				std::vector<PointSwap>::iterator it = elems.begin(), end = elems.end();
+				bool found = false;
+				while(it != end) {
+					if(*it == v[i]) {
+						elems.erase(it);
+						found = true;
+						break;
+					}
+					++it;
+				}
+				if(!found) elems.push_back(v[i]);
+			}
 			return *this;
-			//for(size_t i=0; i<v.size(); i++) { // wg Romana
-			//	std::vector<PointSwap>::iterator it = elems.begin(), end = elems.end();
-			//	bool found = false;
-			//	while(it != end) {
-			//		if(*it == v[i]) {
-			//			elems.erase(it);
-			//			found = true;
-			//			break;
-			//		}
-			//		++it;
-			//	}
-			//	if(!found) elems.push_back(v[i]);
-			//}
-			//return *this;
 		}
 
 		/** Mnozenie przez liczbe (dowolna zmiennoprzecinkowa) */
