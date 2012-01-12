@@ -66,6 +66,10 @@ namespace WMH {
 				return elems.size();
 			}
 
+			inline void zero() {
+				elems.clear();
+			}
+
 			/** Negacja */
 			Velocity operator~() const;
 			/** Tworzy sume logiczna dwoch predkosci (v + ~v == pusty)*/

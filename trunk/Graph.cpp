@@ -2,13 +2,15 @@
 
 #include "Graph.h"
 
+float WMH::Graph::NO_EDGE = MAX_FLOAT;
+
 void WMH::Graph::allocateMatrix(int V) {
 	vertexCount = V;
 	adjacencyMatrix = new float*[V];
 	for (int i = 0; i < vertexCount; i++) {
 		adjacencyMatrix[i] = new float[vertexCount];
 		for (int j = 0; j < vertexCount; j++)
-			adjacencyMatrix[i][j] = 99999.0f;
+			adjacencyMatrix[i][j] = NO_EDGE;
 	}
 }
 
@@ -27,15 +29,18 @@ void WMH::Graph::freeMatrix() {
 	}
 }
 
-WMH::Graph::Graph(int V, float maxDist) {
+WMH::Graph::Graph(int V, float P, float maxDist) {
 	allocateMatrix(V);
 
 	if(maxDist < 0.1f)
 		maxDist = 0.1f;
 
-	for(int i=0; i<V; i++)
-		for(int j=i+1; j<V; j++)
-			addEdge(i, j, randf(0.1f, maxDist));
+	for (int i = 0; i < V; i++) {
+		for (int j = i + 1; j < V; j++) {
+			if (P >= 1.0f) addEdge(i, j, randf(0.05f, maxDist));
+			else if (randf() < P) addEdge(i, j, randf(0.05f, maxDist));
+		}
+	}
 }
 
 float WMH::Graph::hamiltonLength(std::vector<int>& cycle) const {
@@ -43,10 +48,10 @@ float WMH::Graph::hamiltonLength(std::vector<int>& cycle) const {
 
 	float dist = 0.0f;
 	for(int i=0; i<vertexCount-1; i++) {
-		if(adjacencyMatrix[cycle[i]][cycle[i+1]] == 0.0f) return MAX_FLOAT; // brak sciezki, TODO: uwaga, to zaklada ze 0 = brak sciezki, nie zmieniac tego na razie
+		if(adjacencyMatrix[cycle[i]][cycle[i+1]] == NO_EDGE) return MAX_FLOAT; // brak sciezki
 		dist += adjacencyMatrix[cycle[i]][cycle[i+1]];
 	}
-	if(adjacencyMatrix[cycle[vertexCount-1]][cycle[0]] == 0.0f)	return MAX_FLOAT; // brak sciezki
+	if(adjacencyMatrix[cycle[vertexCount-1]][cycle[0]] == NO_EDGE)	return MAX_FLOAT; // brak sciezki
 	dist += adjacencyMatrix[cycle[vertexCount-1]][cycle[0]];
 	return dist;
 }

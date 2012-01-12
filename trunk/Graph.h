@@ -2,11 +2,12 @@
 
 #include "stdafx.h"
 
-#include "Features.h"
+#include "utils.h"
 
 namespace WMH {
 	/** Klasa reprezentuje graf, wybrano reprezentacje macierzowa */
 	class Graph {
+		static float NO_EDGE;
 		/** Macierz sasiedztwa */
 		float** adjacencyMatrix;
 		/** Ilosc wierzcholkow */
@@ -32,7 +33,7 @@ namespace WMH {
 		}
 
 		/** Tworzy graf pelny z V wierzcholkami o dlugosciach z zakresu (0.1, maxDist) */
-		Graph(int V, float maxDist);
+		Graph(int V, float P, float maxDist);
 
 		/** To musi byc zadeklarowane zeby uniknac glupich bledow */
 		Graph(const Graph& g2) {
@@ -74,15 +75,15 @@ namespace WMH {
 		/** Usuwa krawedz i-j */
 		inline void removeEdge(int i, int j) {
 			if (i >= 0 && i < vertexCount && j >= 0 && j < vertexCount) {
-				adjacencyMatrix[i][j] = 0.0f;
-				adjacencyMatrix[j][i] = 0.0f;
+				adjacencyMatrix[i][j] = NO_EDGE;
+				adjacencyMatrix[j][i] = NO_EDGE;
 			}
 		}
 
 		/** Sprawdza czy istnieje krawedz i-j */
 		inline bool isEdge(int i, int j) const { 
 			if (i >= 0 && i < vertexCount && j >= 0 && j < vertexCount)
-				return (adjacencyMatrix[i][j] > 0.0f);
+				return (adjacencyMatrix[i][j] != NO_EDGE);
 			else
 				return false;
 		}
@@ -92,7 +93,7 @@ namespace WMH {
 			if(isEdge(i, j))
 				return adjacencyMatrix[i][j];
 			else
-				return 0.0f; // TODO: dodac duzy koszt jesli nie ma polaczenia, na razie wszedzie sa
+				return MAX_FLOAT;
 		}
 
 		/** Zwraca liczbe wierzcholkow */
