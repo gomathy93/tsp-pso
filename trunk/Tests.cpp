@@ -104,8 +104,8 @@ namespace WMH {
 		int bestREHOPE = 0;
 		int bestIndex = -1;
 
-		const int CHECKS = 10;
-		const int MEAN = 10;
+		const int CHECKS = 20;
+		const int MEAN = 20;
 		// i sprawdzen losowych wartosci
 		for(int i=0; i<CHECKS; i++) {
 			std::cout << "Check " << i + 1 << " of " << CHECKS << std::endl;
@@ -132,7 +132,7 @@ namespace WMH {
 			avScore /= static_cast<float>(MEAN);
 			avScoreSA /= static_cast<float>(MEAN);
 			avScoreRS /= static_cast<float>(MEAN);
-			std::cout << "Average score: " << avScore << " (SA: " << avScoreSA 
+			std::cout << "Average score (" << MEAN << " checks): " << avScore << " (SA: " << avScoreSA 
 				<< ", RS: " << avScoreRS << ")" << std::endl;
 			if(avScore - avScoreSA < bestScore) {
 				bestIndex = i + 1;

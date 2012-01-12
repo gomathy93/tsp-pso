@@ -2,6 +2,12 @@
 
 #include "TspSwarm.h"
 
+const float WMH::PSO::TspSwarm::DEF_C1 = 0.45895f;
+const float WMH::PSO::TspSwarm::DEF_C2 = -0.078222f;
+const float WMH::PSO::TspSwarm::DEF_OMEGA = 1.43f;
+const int WMH::PSO::TspSwarm::DEF_REHOPE = 80; // aby tego nie robic ustawic ten parametr na wysoka wartosc
+const int WMH::PSO::TspSwarm::DEF_MAXNOCHANGE = 1000;
+
 WMH::PSO::TspSwarm::TspSwarm(	const Graph* g, int particlesCount, 
 								float C1, float C2, float omega, 
 								int particleRehope, int maxNoChange) {

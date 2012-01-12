@@ -16,7 +16,8 @@ int main(int argc, char* argv[]) {
 	srand(static_cast<unsigned int>(time(NULL)));
 	std::cout.precision(5);
 
-	params_test();
+	//params_test();
+	same_graphs_test();
 	
 	system("PAUSE");
 	return 0;
