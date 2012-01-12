@@ -4,11 +4,10 @@
 #include "TspSwarm.h"
 #include "utils.h"
 
-// TODO dodac const
-float WMH::PSO::Particle::OMEGA = DEF_OMEGA;
-float WMH::PSO::Particle::C1 = DEF_C1;
-float WMH::PSO::Particle::C2 = DEF_C2;
-int WMH::PSO::Particle::REHOPE = DEF_REHOPE;
+float WMH::PSO::Particle::OMEGA = WMH::PSO::TspSwarm::DEF_OMEGA;
+float WMH::PSO::Particle::C1 = WMH::PSO::TspSwarm::DEF_C1;
+float WMH::PSO::Particle::C2 = WMH::PSO::TspSwarm::DEF_C2;
+int WMH::PSO::Particle::REHOPE = WMH::PSO::TspSwarm::DEF_REHOPE;
 
 void WMH::PSO::Particle::init(TspSwarm* swarm, int id) {
 	this->swarm = swarm;
