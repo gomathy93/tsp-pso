@@ -73,6 +73,29 @@ namespace WMH {
 		*/
 	}
 
+	void same_graphs_test(float C1, float C2, float OMEGA, int REHOPE) {
+		std::vector<Graph> graphs;
+		graphs.push_back(Graph("art-graph.txt"));
+		graphs.push_back(Graph("25-1.txt"));
+		graphs.push_back(Graph("25-2.txt"));
+		graphs.push_back(Graph("25-3.txt"));
+
+		std::vector<iAlgo*>	algos;
+		for(unsigned int i=0; i<graphs.size(); i++) {
+			algos.push_back(new PSO::TspSwarm(&graphs[i], graphs[i].V(), C1, C2, OMEGA, REHOPE));
+			algos.push_back(new RS::RandomSearch(&graphs[i]));
+			algos.push_back(new SA::SimulatedAnnealing(&graphs[i]));
+		}
+
+		std::cout << "Algorithm\t\tBest cost\tComputation time\tVertices" << std::endl;
+		for(unsigned int i=0; i<algos.size(); i++) {
+			algos[i]->compute();
+			std::cout << algos[i]->getAlgorithmName() << '\t' << algos[i]->getBestCost() << 
+				"\t\t" << algos[i]->getComputationTime() << "ms\t\t\t" << algos[i]->getGraph()->V() << std::endl;
+			delete algos[i];
+		}
+	}
+
 	void params_test() {
 		float bestScore = MAX_FLOAT;
 		float bestC1 = 0.0f;
@@ -95,7 +118,7 @@ namespace WMH {
 			float avScoreRS = 0.0f;
 			// usrednienie dla j grafow
 			for(int j=0; j<MEAN; j++) {
-				Graph g(20, randf(0.8f, 1.1f), 10.0f);
+				Graph g(20, 1.0f, 10.0f);
 				PSO::TspSwarm swarm(&g, g.V(), C1, C2, OMEGA, REHOPE);
 				SA::SimulatedAnnealing sa(&g);
 				RS::RandomSearch rnd(&g);
@@ -109,9 +132,8 @@ namespace WMH {
 			avScore /= static_cast<float>(MEAN);
 			avScoreSA /= static_cast<float>(MEAN);
 			avScoreRS /= static_cast<float>(MEAN);
-			std::cout << "Average score: " << avScore << "(SA: " << avScoreSA 
+			std::cout << "Average score: " << avScore << " (SA: " << avScoreSA 
 				<< ", RS: " << avScoreRS << ")" << std::endl;
-			std::cout << "Diff: " << avScore - avScoreSA << std::endl;
 			if(avScore - avScoreSA < bestScore) {
 				bestIndex = i + 1;
 				bestScore = avScore - avScoreSA;
@@ -126,5 +148,7 @@ namespace WMH {
 		std::cout << "Best C2: " << bestC2 << std::endl;
 		std::cout << "Best OMEGA: " << bestOMEGA << std::endl;
 		std::cout << "Best REHOPE: " << bestREHOPE << std::endl;
+
+		same_graphs_test(bestC1, bestC2, bestOMEGA, bestREHOPE);
 	}
 }
