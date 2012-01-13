@@ -3,16 +3,50 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PSO", "PSO.vcproj", "{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSO-GUI", "PSO-GUI\PSO-GUI.csproj", "{857E9CD5-C944-4169-BB55-2A68B3E1C428}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
+		Release DLL|Any CPU = Release DLL|Any CPU
+		Release DLL|Mixed Platforms = Release DLL|Mixed Platforms
+		Release DLL|Win32 = Release DLL|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Debug|Win32.Build.0 = Debug|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release DLL|Any CPU.ActiveCfg = Release DLL|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release DLL|Mixed Platforms.ActiveCfg = Release DLL|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release DLL|Mixed Platforms.Build.0 = Release DLL|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release DLL|Win32.ActiveCfg = Release DLL|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release DLL|Win32.Build.0 = Release DLL|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release|Win32.ActiveCfg = Release|Win32
 		{EB05BBEA-D1DB-4756-B90F-FC6EA7D3102C}.Release|Win32.Build.0 = Release|Win32
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release DLL|Any CPU.ActiveCfg = Release DLL|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release DLL|Mixed Platforms.ActiveCfg = Release DLL|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release DLL|Mixed Platforms.Build.0 = Release DLL|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release DLL|Win32.ActiveCfg = Release DLL|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release|Any CPU.Build.0 = Release|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{857E9CD5-C944-4169-BB55-2A68B3E1C428}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
