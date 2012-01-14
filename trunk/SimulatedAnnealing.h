@@ -36,13 +36,17 @@ namespace WMH {
 			std::vector<int>	bestSolution;
 			/** Czas obliczen w ms */
 			DWORD				computationTime;
+			/** Aktualna liczba iteracji glownej petli algorytmu */
+			int					iter;
+			/** Na potrzeby rysowania wykresu, wyniki w kolejnych iteracjach */
+			std::vector<IterCost>	iterResults;
 		public:
 			/** -1 = liczba wierzcholkow */
 			SimulatedAnnealing(const Graph* g, int maxInnerIter = -1, 
 				float startTemp = 100.0f, float stopTemp = 1.0E-4f, 
 				float coolingFactor = 0.9f);
 
-			void compute();
+			void compute(bool saveResults);
 
 			/** Zwraca koszt najlepszego rozwiazania */
 			inline float getBestCost() const {
@@ -57,6 +61,11 @@ namespace WMH {
 			/** Zwraca nazwe algorytmu */
 			inline const char* getAlgorithmName() const	{
 				return "SimulatedAnnealing";
+			}
+
+			/** Zwraca tabele kosztow w poszczegolnych iteracjach */
+			inline std::vector<IterCost> getCostTable() const {
+				return iterResults;
 			}
 
 			/** Zwraca czas obliczen w ms */

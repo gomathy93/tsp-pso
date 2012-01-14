@@ -89,7 +89,7 @@ namespace WMH {
 
 		std::cout << "Algorithm\t\tBest cost\tComputation time\tVertices" << std::endl;
 		for(unsigned int i=0; i<algos.size(); i++) {
-			algos[i]->compute();
+			algos[i]->compute(false);
 			std::cout << algos[i]->getAlgorithmName() << '\t' << algos[i]->getBestCost() << 
 				"\t\t" << algos[i]->getComputationTime() << "ms\t\t\t" << algos[i]->getGraph()->V() << std::endl;
 			delete algos[i];
@@ -122,9 +122,9 @@ namespace WMH {
 				PSO::TspSwarm swarm(&g, g.V(), C1, C2, OMEGA, REHOPE);
 				SA::SimulatedAnnealing sa(&g);
 				RS::RandomSearch rnd(&g);
-				swarm.compute();
-				sa.compute();
-				rnd.compute();
+				swarm.compute(false);
+				sa.compute(false);
+				rnd.compute(false);
 				avScore += swarm.getBestCost();
 				avScoreSA += sa.getBestCost();
 				avScoreRS += rnd.getBestCost();

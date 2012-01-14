@@ -41,6 +41,8 @@ namespace WMH {
 			int			noChange;
 			/** Ogólna liczba iteracji */
 			int			iter;
+			/** Na potrzeby rysowania wykresu, wyniki w kolejnych iteracjach */
+			std::vector<IterCost>	iterResults;
 		public:
 			// Wartosci domyslne
 			static const float DEF_C1; // C++ jest glupie, to trzeba zadeklarowac w .cpp
@@ -65,7 +67,7 @@ namespace WMH {
 			}
 			
 			/** Rozpoczyna obliczenia */
-			void compute();
+			void compute(bool saveResults);
 			
 			/** Zwraca koszt najlepszego rozwiazania */
 			inline float getBestCost() const {
@@ -80,6 +82,11 @@ namespace WMH {
 			/** Zwraca nazwe algorytmu */
 			inline const char* getAlgorithmName() const {
 				return "PSO\t\t";
+			}
+
+			/** Zwraca tabele kosztow w poszczegolnych iteracjach */
+			inline std::vector<IterCost> getCostTable() const {
+				return iterResults;
 			}
 
 			/** Zwraca czas obliczen w ms */

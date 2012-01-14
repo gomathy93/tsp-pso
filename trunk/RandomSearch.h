@@ -17,8 +17,12 @@ namespace WMH {
 			std::vector<int>	best;
 			/** Czas obliczen w ms */
 			DWORD computationTime;
+			/** Ogolna liczba iteracji */
+			int		iter;
 			/** Liczba iteracji ktora nie poprawila wyniku */
 			int		noChange;
+			/** Na potrzeby rysowania wykresu, wyniki w kolejnych iteracjach */
+			std::vector<IterCost>	iterResults;
 		public:
 			/** Inicjuje przeszukiwanie rozwiazan dla TSP dla grafu g */
 			RandomSearch(const Graph* g, int maxNoChange = 1000) {
@@ -27,12 +31,12 @@ namespace WMH {
 				bestCost = MAX_FLOAT;
 				computationTime = 0;
 				noChange = 0;
+				iter = 0;
 			}
 
 			/** Rozpoczyna obliczenia */
-			void compute()	{
+			void compute(bool saveResults) {
 				computationTime = GetTickCount();
-				noChange = 0;
 				
 				// inicjacja
 				std::vector<int> solution(g->V());
@@ -41,19 +45,29 @@ namespace WMH {
 				bestCost = g->hamiltonLength(solution);
 				best = solution;
 
-				while(noChange < NOCHANGE_MAX) {
+				noChange = 0;
+				iter = 0;
+				iterResults.clear();
+				if(saveResults)
+					iterResults.push_back(IterCost(iter, bestCost));
 
+				while(noChange < NOCHANGE_MAX) {
 					noChange++;
+					iter++;
 					std::swap(solution[rand()%g->V()], solution[rand()%g->V()]);
 					float cost = g->hamiltonLength(solution);
 					if(cost < bestCost) {
-						//std::cout << "Better cost found: " << cost << " < " << bestCost << std::endl;
 						bestCost = cost;
 						best = solution;
 						noChange = 0;
 
+						if(saveResults)
+							iterResults.push_back(IterCost(iter, bestCost));
 					}
 				}
+
+				if(saveResults)
+					iterResults.push_back(IterCost(iter, bestCost));
 				computationTime = GetTickCount() - computationTime;
 			}
 
@@ -70,6 +84,11 @@ namespace WMH {
 			/** Zwraca nazwe algorytmu */
 			inline const char* getAlgorithmName() const {
 				return "RandomSearch\t";
+			}
+
+			/** Zwraca tabele kosztow w poszczegolnych iteracjach */
+			inline std::vector<IterCost> getCostTable() const {
+				return iterResults;
 			}
 
 			/** Zwraca czas obliczen w ms */

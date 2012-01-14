@@ -25,17 +25,25 @@ WMH::PSO::TspSwarm::TspSwarm(	const Graph* g, int particlesCount,
 }
 
 
-void WMH::PSO::TspSwarm::compute() {
+void WMH::PSO::TspSwarm::compute(bool saveResults) {
 	computationTime = GetTickCount();
 	noChange = 0;
 	iter = 0;
+	iterResults.clear();
+
 	for(unsigned int i=0; i<particles.size(); i++) 
 		particles[i].init(this, i + 1);
 
+	float prevBestFit = bestFit;
 	while(noChange < NOCHANGE_MAX) {
-		iter++;
 		noChange++;
 		for(unsigned int i=0; i<particles.size(); i++) particles[i].update();
+		
+		if(saveResults && bestFit != prevBestFit) {
+			iterResults.push_back(IterCost(iter, bestFit));
+			prevBestFit = bestFit;
+		}
+		iter++;
 	}
 
 	// TODO: wykomentowalem Romana
@@ -70,5 +78,7 @@ void WMH::PSO::TspSwarm::compute() {
 			particles[i].update();
 	}*/
 
+	if(saveResults)
+		iterResults.push_back(IterCost(iter, bestFit));
 	computationTime = GetTickCount() - computationTime;
 }

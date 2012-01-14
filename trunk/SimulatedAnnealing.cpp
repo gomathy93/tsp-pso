@@ -12,7 +12,7 @@ WMH::SA::SimulatedAnnealing::SimulatedAnnealing(const Graph* g, int maxInnerIter
 	COOLING_FACTOR = coolingFactor;
 }
 
-void WMH::SA::SimulatedAnnealing::compute() {
+void WMH::SA::SimulatedAnnealing::compute(bool saveResults) {
 	computationTime = GetTickCount();;
 	// inicjacja
 	currSolution.resize(g->V());
@@ -24,9 +24,14 @@ void WMH::SA::SimulatedAnnealing::compute() {
 	bestSolution = currSolution;
 	bestCost = currCost;
 
+	iterResults.clear();
+	iter = 0;
+	if(saveResults)
+		iterResults.push_back(IterCost(iter, bestCost));
+	
 	temp = START_TEMP;
-
 	while (temp > STOP_TEMP) {
+		iter++;
 		innerInter = 0;
 		while (innerInter < INNER_ITER_MAX) {
 			innerInter++;
@@ -54,10 +59,21 @@ void WMH::SA::SimulatedAnnealing::compute() {
 				if (currCost < bestCost) {
 					bestCost = currCost;
 					bestSolution = currSolution;
+
+					if(saveResults) {
+						size_t count = iterResults.size();
+						if(count > 0 && iterResults[count-1].iter == iter)
+							iterResults[count-1].cost = bestCost; // aktualizacja
+						else
+							iterResults.push_back(IterCost(iter, bestCost));
+					}
 				}
 			}
 		} // while (innerInter < INNER_ITER_MAX) 
-		temp *= COOLING_FACTOR; // nowa wartosc temperatury
+		temp *= COOLING_FACTOR; // nowa wartosc temperatury		
 	} // while(temp < STOP_TEMP)
+	
+	if(saveResults)
+		iterResults.push_back(IterCost(iter, bestCost));
 	computationTime = GetTickCount() - computationTime;
 }

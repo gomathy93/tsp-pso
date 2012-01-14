@@ -25,12 +25,36 @@ AlgoResults solveGraph(const char* graph, float C1, float C2,
 	SA::SimulatedAnnealing sa(&g);
 	RS::RandomSearch rs(&g, NOCHANGE);
 
-	swarm.compute();
-	sa.compute();
-	rs.compute();
+	swarm.compute(true);
+	sa.compute(true);
+	rs.compute(true);
 
-	AlgoResults res = { 1, g.V(), swarm.getBestCost(), sa.getBestCost(), rs.getBestCost() };
-	return res;
+	std::ofstream fout;
+	std::vector<IterCost> results;
+
+	fout.open("pso.txt");
+	results = swarm.getCostTable();
+	for(size_t i=0; i<results.size()-1; i++)
+		fout << results[i].iter << std::endl << results[i].cost << std::endl;
+	fout << results[results.size()-1].iter << std::endl << results[results.size()-1].cost;
+	fout.close();
+
+	fout.open("sa.txt");
+	results = sa.getCostTable();
+	for(size_t i=0; i<results.size()-1; i++)
+		fout << results[i].iter << std::endl << results[i].cost << std::endl;
+	fout << results[results.size()-1].iter << std::endl << results[results.size()-1].cost;
+	fout.close();
+
+	fout.open("rs.txt");
+	results = rs.getCostTable();
+	for(size_t i=0; i<results.size()-1; i++)
+		fout << results[i].iter << std::endl << results[i].cost << std::endl;
+	fout << results[results.size()-1].iter << std::endl << results[results.size()-1].cost;
+	fout.close();
+
+	AlgoResults ret = { 1, g.V(), swarm.getBestCost(), sa.getBestCost(), rs.getBestCost() };
+	return ret;
 }
 
 #ifdef AS_DLL

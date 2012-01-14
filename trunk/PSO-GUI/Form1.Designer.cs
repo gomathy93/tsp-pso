@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.openFile = new System.Windows.Forms.OpenFileDialog();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.psoCostLabel = new System.Windows.Forms.Label();
@@ -56,41 +56,27 @@
             this.c2Val = new System.Windows.Forms.TextBox();
             this.c1Val = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.openFile = new System.Windows.Forms.OpenFileDialog();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // splitContainer1
+            // openFile
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(637, 355);
-            this.splitContainer1.SplitterDistance = 426;
-            this.splitContainer1.TabIndex = 0;
+            this.openFile.Filter = "Pliki z grafami|*.txt";
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.vercicesCountLabel);
             this.groupBox2.Controls.Add(this.startButton);
-            this.groupBox2.Location = new System.Drawing.Point(4, 167);
+            this.groupBox2.Location = new System.Drawing.Point(453, 176);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(195, 183);
-            this.groupBox2.TabIndex = 1;
+            this.groupBox2.Size = new System.Drawing.Size(172, 186);
+            this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Obliczenia";
             // 
@@ -107,7 +93,7 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Location = new System.Drawing.Point(6, 61);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(180, 114);
+            this.groupBox3.Size = new System.Drawing.Size(157, 117);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Wyniki";
@@ -145,6 +131,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Blue;
             this.label11.Location = new System.Drawing.Point(8, 69);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(89, 13);
@@ -154,6 +141,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Green;
             this.label10.Location = new System.Drawing.Point(8, 42);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(125, 13);
@@ -163,6 +151,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.Red;
             this.label6.Location = new System.Drawing.Point(8, 16);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(140, 13);
@@ -194,7 +183,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.startButton.Location = new System.Drawing.Point(9, 19);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(177, 23);
+            this.startButton.Size = new System.Drawing.Size(154, 23);
             this.startButton.TabIndex = 0;
             this.startButton.Text = "Załaduj i rozpocznij";
             this.startButton.UseVisualStyleBackColor = true;
@@ -202,8 +191,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button4);
@@ -219,10 +207,10 @@
             this.groupBox1.Controls.Add(this.c2Val);
             this.groupBox1.Controls.Add(this.c1Val);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Location = new System.Drawing.Point(452, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(196, 157);
-            this.groupBox1.TabIndex = 0;
+            this.groupBox1.Size = new System.Drawing.Size(173, 157);
+            this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parametry";
             // 
@@ -234,7 +222,6 @@
             this.button6.TabIndex = 14;
             this.button6.Text = "?";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -244,7 +231,6 @@
             this.button5.TabIndex = 13;
             this.button5.Text = "?";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button4_Click);
             // 
             // button4
             // 
@@ -336,7 +322,7 @@
             this.omegaVal.Name = "omegaVal";
             this.omegaVal.Size = new System.Drawing.Size(49, 20);
             this.omegaVal.TabIndex = 3;
-            this.omegaVal.Text = "1,43";
+            this.omegaVal.Text = "1.43";
             this.omegaVal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // c2Val
@@ -345,7 +331,7 @@
             this.c2Val.Name = "c2Val";
             this.c2Val.Size = new System.Drawing.Size(49, 20);
             this.c2Val.TabIndex = 2;
-            this.c2Val.Text = "-0,0782";
+            this.c2Val.Text = "-0.0782";
             this.c2Val.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // c1Val
@@ -354,7 +340,7 @@
             this.c1Val.Name = "c1Val";
             this.c1Val.Size = new System.Drawing.Size(49, 20);
             this.c1Val.TabIndex = 1;
-            this.c1Val.Text = "0,45895";
+            this.c1Val.Text = "0.45895";
             this.c1Val.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
@@ -366,20 +352,28 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "C1:";
             // 
-            // openFile
+            // panel1
             // 
-            this.openFile.Filter = "Pliki z grafami|*.txt";
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(434, 350);
+            this.panel1.TabIndex = 6;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
+            this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 355);
-            this.Controls.Add(this.splitContainer1);
+            this.ClientSize = new System.Drawing.Size(637, 373);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Particle Swarm Optimization";
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -392,8 +386,24 @@
 
         #endregion
 
-        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.OpenFileDialog openFile;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label psoCostLabel;
+        private System.Windows.Forms.Label randomCostLabel;
+        private System.Windows.Forms.Label saCostLabel;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label vercicesCountLabel;
+        private System.Windows.Forms.Button startButton;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox noChangeVal;
         private System.Windows.Forms.TextBox rehopeVal;
@@ -404,23 +414,7 @@
         private System.Windows.Forms.TextBox c2Val;
         private System.Windows.Forms.TextBox c1Val;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Label vercicesCountLabel;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label saCostLabel;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label randomCostLabel;
-        private System.Windows.Forms.Label psoCostLabel;
-        private System.Windows.Forms.OpenFileDialog openFile;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
