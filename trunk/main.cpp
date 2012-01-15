@@ -66,6 +66,9 @@ int main(int argc, char* argv[]) {
 	srand(static_cast<unsigned int>(time(NULL)));
 	std::cout.precision(5);
 
+	generate_and_save("50-1.txt", 50);
+	generate_and_save("100-1.txt", 100);
+
 	//params_test();
 	same_graphs_test();
 	
