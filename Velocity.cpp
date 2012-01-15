@@ -21,7 +21,7 @@ namespace WMH {
 			return added;
 		}
 
-		Velocity& Velocity::operator+=(const Velocity& v) { // TODO: czy to dobrze dziala?
+		Velocity& Velocity::operator+=(const Velocity& v) {
 			// stara wersja wg mnie
 			/*for(size_t i=0; i<v.size(); i++) {
 				if(size() > 0 && elems.back() == v[i])

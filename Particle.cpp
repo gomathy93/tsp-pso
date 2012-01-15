@@ -25,32 +25,22 @@ void WMH::PSO::Particle::update() {
 		swarm->best = position;
 		swarm->bestFit = fit;
 		swarm->noChange = 0;
-		// TODO debug
-		//wprintf(L"iter=%d, globalBest=%f, particle=%d\r\n", swarm->iter, fit, id);
 	}
 	if(fit < bestFit || best.size() == 0) {
 		best = position;
 		bestFit = fit;
 		noChange = 0;
-		// TODO debug
-		//if(id == 1) wprintf(L"iter=%d, new local best %f\r\n", swarm->iter, fit);
-		//std::cout << "best: " << best.cost(graph)<<std::endl;
-		//std::cout << "pos: " << position.cost(graph)<<std::endl;
-		//std::cout << "bestGlobal: " << bestGlobal.cost(graph)<<std::endl;
 	}
 
 	if(noChange < REHOPE) {
 		// Zmiana polozenia i predkosci
-		speed = speed * OMEGA + (best - position) * C1 + (bestGlobal - position) * C2;
+		speed = speed * randf(min(OMEGA, 0.0f), max(OMEGA, 0.0f)) + 
+			(best - position) * randf(min(C1, 0.0f), max(C1, 0.0f)) + 
+			(bestGlobal - position) * randf(min(C2, 0.0f), max(C2, 0.0f));
 		position += speed;
 	} else {
 		speed.zero();
 		position.randomize(graph->V());
 		noChange = 0;
 	}
-
-	// TODO: debug
-	/*wchar_t debug_str[512];
-	wsprintf(debug_str, L"speed %d\r\n", speed.size());
-	OutputDebugStringW(debug_str);*/
 }

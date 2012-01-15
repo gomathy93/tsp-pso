@@ -52,11 +52,6 @@ namespace WMH {
 				return indices[index];
 			}
 
-			// TODO: temp, remove
-			inline int& operator[](int index) {
-				return indices[index];
-			}
-
 			inline Position& operator=(const Position& p) {
 				if (this == &p) return *this;
 				assign(p);

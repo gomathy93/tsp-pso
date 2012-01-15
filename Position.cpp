@@ -57,7 +57,7 @@ namespace WMH {
 		}
 
 		/** Pozycja - pozycja */
-		Velocity Position::operator-(const Position& p2) const { // TODO: czy to dobrze dziala?
+		Velocity Position::operator-(const Position& p2) const {
 			if(size() != p2.size()) return Velocity();
 			std::list<PointSwap> swaps;
 			int* indCopy = new int[N];
@@ -86,7 +86,7 @@ namespace WMH {
 		float Position::cost(const Graph* g) const {
 			if(N == 0) return 0.0f;
 			float sum = 0.0f;
-			for(size_t i=0; i<N-1; i++) // TODO: dodac duzy koszt jesli nie ma polaczenia, na razie wszedzie sa
+			for(size_t i=0; i<N-1; i++)
 					sum += g->getDist(indices[i], indices[i+1]);
 			sum += g->getDist(indices[N-1], indices[0]);
 			return sum;
