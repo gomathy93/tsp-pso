@@ -24,4 +24,4 @@ typedef struct AlgoResults {
 // ta funkcja bedzie wywolywana przez GUI
 extern "C" __declspec(dllexport) AlgoResults __cdecl solveGraph(
 		const char* graph, float C1, float C2, 
-		float OMEGA, int REHOPE, int NOCHANGE);
+		float OMEGA, int REHOPE, int NOCHANGE, int particles);

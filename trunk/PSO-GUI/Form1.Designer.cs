@@ -41,6 +41,8 @@
             this.vercicesCountLabel = new System.Windows.Forms.Label();
             this.startButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.particlesVal = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -73,7 +75,7 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.vercicesCountLabel);
             this.groupBox2.Controls.Add(this.startButton);
-            this.groupBox2.Location = new System.Drawing.Point(453, 176);
+            this.groupBox2.Location = new System.Drawing.Point(453, 193);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(172, 186);
             this.groupBox2.TabIndex = 5;
@@ -192,6 +194,8 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.particlesVal);
+            this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.button5);
             this.groupBox1.Controls.Add(this.button4);
@@ -209,14 +213,32 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(452, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(173, 157);
+            this.groupBox1.Size = new System.Drawing.Size(173, 173);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Parametry";
             // 
+            // particlesVal
+            // 
+            this.particlesVal.Location = new System.Drawing.Point(80, 13);
+            this.particlesVal.Name = "particlesVal";
+            this.particlesVal.Size = new System.Drawing.Size(49, 20);
+            this.particlesVal.TabIndex = 16;
+            this.particlesVal.Text = "25";
+            this.particlesVal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(9, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(65, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Cząsteczek:";
+            // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(133, 71);
+            this.button6.Location = new System.Drawing.Point(134, 91);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(20, 20);
             this.button6.TabIndex = 14;
@@ -225,7 +247,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(133, 45);
+            this.button5.Location = new System.Drawing.Point(134, 65);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(20, 20);
             this.button5.TabIndex = 13;
@@ -234,7 +256,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(133, 19);
+            this.button4.Location = new System.Drawing.Point(134, 39);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(20, 20);
             this.button4.TabIndex = 12;
@@ -244,7 +266,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(133, 125);
+            this.button2.Location = new System.Drawing.Point(134, 145);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(20, 20);
             this.button2.TabIndex = 11;
@@ -254,7 +276,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(133, 98);
+            this.button1.Location = new System.Drawing.Point(134, 118);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(20, 20);
             this.button1.TabIndex = 10;
@@ -265,15 +287,15 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(2, 128);
+            this.label5.Location = new System.Drawing.Point(42, 148);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 13);
+            this.label5.Size = new System.Drawing.Size(32, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "NOCHANGE:";
+            this.label5.Text = "Stop:";
             // 
             // noChangeVal
             // 
-            this.noChangeVal.Location = new System.Drawing.Point(79, 125);
+            this.noChangeVal.Location = new System.Drawing.Point(80, 145);
             this.noChangeVal.Name = "noChangeVal";
             this.noChangeVal.Size = new System.Drawing.Size(49, 20);
             this.noChangeVal.TabIndex = 8;
@@ -282,7 +304,7 @@
             // 
             // rehopeVal
             // 
-            this.rehopeVal.Location = new System.Drawing.Point(79, 98);
+            this.rehopeVal.Location = new System.Drawing.Point(80, 118);
             this.rehopeVal.Name = "rehopeVal";
             this.rehopeVal.Size = new System.Drawing.Size(49, 20);
             this.rehopeVal.TabIndex = 7;
@@ -292,7 +314,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 102);
+            this.label4.Location = new System.Drawing.Point(19, 122);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 13);
             this.label4.TabIndex = 6;
@@ -301,7 +323,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 74);
+            this.label3.Location = new System.Drawing.Point(26, 94);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 5;
@@ -310,7 +332,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(51, 48);
+            this.label2.Location = new System.Drawing.Point(52, 68);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(23, 13);
             this.label2.TabIndex = 4;
@@ -318,7 +340,7 @@
             // 
             // omegaVal
             // 
-            this.omegaVal.Location = new System.Drawing.Point(79, 71);
+            this.omegaVal.Location = new System.Drawing.Point(80, 91);
             this.omegaVal.Name = "omegaVal";
             this.omegaVal.Size = new System.Drawing.Size(49, 20);
             this.omegaVal.TabIndex = 3;
@@ -327,7 +349,7 @@
             // 
             // c2Val
             // 
-            this.c2Val.Location = new System.Drawing.Point(79, 45);
+            this.c2Val.Location = new System.Drawing.Point(80, 65);
             this.c2Val.Name = "c2Val";
             this.c2Val.Size = new System.Drawing.Size(49, 20);
             this.c2Val.TabIndex = 2;
@@ -336,7 +358,7 @@
             // 
             // c1Val
             // 
-            this.c1Val.Location = new System.Drawing.Point(79, 19);
+            this.c1Val.Location = new System.Drawing.Point(80, 39);
             this.c1Val.Name = "c1Val";
             this.c1Val.Size = new System.Drawing.Size(49, 20);
             this.c1Val.TabIndex = 1;
@@ -346,7 +368,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(51, 22);
+            this.label1.Location = new System.Drawing.Point(52, 42);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(23, 13);
             this.label1.TabIndex = 0;
@@ -359,7 +381,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(434, 350);
+            this.panel1.Size = new System.Drawing.Size(434, 367);
             this.panel1.TabIndex = 6;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel1_Paint);
             this.panel1.Resize += new System.EventHandler(this.panel1_Resize);
@@ -368,9 +390,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 373);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(637, 390);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Particle Swarm Optimization";
@@ -381,7 +403,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -415,6 +436,8 @@
         private System.Windows.Forms.TextBox c1Val;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox particlesVal;
+        private System.Windows.Forms.Label label7;
     }
 }
 

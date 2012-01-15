@@ -13,7 +13,7 @@
 using namespace WMH;
 
 AlgoResults solveGraph(const char* graph, float C1, float C2,
-					   float OMEGA, int REHOPE, int NOCHANGE) {
+					   float OMEGA, int REHOPE, int NOCHANGE, int particles) {
 	srand(static_cast<unsigned int>(time(NULL)));
 	Graph g(graph);
 	if(g.V() == 0) {
@@ -21,7 +21,7 @@ AlgoResults solveGraph(const char* graph, float C1, float C2,
 		return res;
 	}
 
-	PSO::TspSwarm swarm(&g, g.V(), C1, C2, OMEGA, REHOPE, NOCHANGE);
+	PSO::TspSwarm swarm(&g, particles, C1, C2, OMEGA, REHOPE, NOCHANGE);
 	SA::SimulatedAnnealing sa(&g);
 	RS::RandomSearch rs(&g, NOCHANGE);
 

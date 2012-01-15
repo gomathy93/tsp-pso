@@ -10,7 +10,8 @@ const int WMH::PSO::TspSwarm::DEF_MAXNOCHANGE = 1000;
 
 WMH::PSO::TspSwarm::TspSwarm(	const Graph* g, int particlesCount, 
 								float C1, float C2, float omega, 
-								int particleRehope, int maxNoChange) {
+								int particleRehope, int maxNoChange, 
+								bool doRehope) {
 	this->g = g;
 	bestFit = MAX_FLOAT;
 	particles.resize(particlesCount);
@@ -22,6 +23,7 @@ WMH::PSO::TspSwarm::TspSwarm(	const Graph* g, int particlesCount,
 	Particle::OMEGA = omega;
 	Particle::REHOPE = particleRehope;
 	NOCHANGE_MAX = maxNoChange;
+	rehope = doRehope;
 }
 
 
@@ -46,37 +48,26 @@ void WMH::PSO::TspSwarm::compute(bool saveResults) {
 		iter++;
 	}
 
-	// TODO: wykomentowalem Romana
-	/*noChange = 0;
-	while(noChange < NOCHANGE_MAX/2){
-		noChange++;
-		for(unsigned int i=0; i<particles.size(); i++){
-			particles[i].position=particles[i].best;
-			particles[i].speed*0.7;	
+	// rehope
+	if(rehope) {
+		for(int j=0; j<4; j++) { // wykonujemy go 4 razy
+			for(unsigned int i=0; i<particles.size(); i++) {
+				particles[i].position = particles[i].best;
+				particles[i].speed = particles[i].speed * 0.1f;	
+			}
+			noChange = 0;
+			while(noChange < (NOCHANGE_MAX >> 2)) {
+				noChange++;
+				for(unsigned int i=0; i<particles.size(); i++) particles[i].update();
+				
+				if(saveResults && bestFit != prevBestFit) {
+					iterResults.push_back(IterCost(iter, bestFit));
+					prevBestFit = bestFit;
+				}
+				iter++;
+			}
 		}
-		for(unsigned int i=0; i<particles.size(); i++)
-			particles[i].update();
 	}
-	noChange=0;
-		while(noChange < NOCHANGE_MAX/2){
-		noChange++;
-		for(unsigned int i=0; i<particles.size(); i++){
-			particles[i].position=particles[i].best;
-			particles[i].speed;	
-		}
-		for(unsigned int i=0; i<particles.size(); i++)
-			particles[i].update();
-	}
-			noChange=0;
-		while(noChange < NOCHANGE_MAX/2){
-		noChange++;
-		for(unsigned int i=0; i<particles.size(); i++){
-			particles[i].position=particles[i].best;
-			particles[i].speed;	
-		}
-		for(unsigned int i=0; i<particles.size(); i++)
-			particles[i].update();
-	}*/
 
 	if(saveResults)
 		iterResults.push_back(IterCost(iter, bestFit));

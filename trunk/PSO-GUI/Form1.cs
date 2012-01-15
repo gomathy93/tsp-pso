@@ -9,9 +9,12 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Globalization;
+using System.Threading;
 
 namespace PSO_GUI
 {
+    public delegate void OnAlgoEndHandler(AlgoThread algo);
+
     public partial class Form1 : Form
     {
         public Form1()
@@ -19,28 +22,15 @@ namespace PSO_GUI
             InitializeComponent();
         }
 
-        public struct AlgoResults
-        {
-            public int result;
-            public int verticesCount;
-            public float psoCost;
-            public float saCost;
-            public float rsCost;
-        };
-
-        [DllImport("PSO.dll", CharSet = CharSet.Ansi)]
-        public static extern AlgoResults solveGraph(string graph, float C1, float C2, float OMEGA, Int32 REHOPE, Int32 NOCHANGE);
+        Thread thread = null;
+        AlgoThread algo = null;
 
         private void startButton_Click(object sender, EventArgs e)
         {
+            if (thread != null && thread.IsAlive) return; // 1 watek na raz
+
             CultureInfo ci = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             ci.NumberFormat.CurrencyDecimalSeparator = ".";
-
-            maxIter = 0;
-            maxVal = 0.0f;
-            psoRes.Clear();
-            saRes.Clear();
-            rsRes.Clear();
             try
             {
                 float C1 = float.Parse(c1Val.Text, NumberStyles.Any, ci);
@@ -48,62 +38,54 @@ namespace PSO_GUI
                 float OMEGA = float.Parse(c1Val.Text, NumberStyles.Any, ci);
                 Int32 REHOPE = Int32.Parse(rehopeVal.Text);
                 Int32 NOCHANGE = Int32.Parse(noChangeVal.Text);
+                Int32 particles = Int32.Parse(particlesVal.Text);
                 if (openFile.ShowDialog() == DialogResult.OK)
                 {
-                    AlgoResults res = solveGraph(openFile.FileName, 
-                        C1, C2, OMEGA, REHOPE, NOCHANGE);
-                    if (res.result == 1)
-                    {
-                        vercicesCountLabel.Text = res.verticesCount.ToString();
-                        psoCostLabel.Text = res.psoCost.ToString();
-                        saCostLabel.Text = res.saCost.ToString();
-                        randomCostLabel.Text = res.rsCost.ToString();
-
-                        if (File.Exists("pso.txt"))
-                        {
-                            string[] lines = File.ReadAllLines("pso.txt");
-                            for (int i = 0; i < lines.Length - 3; i += 2)
-                            {
-                                int iter = int.Parse(lines[i]);
-                                float cost = float.Parse(lines[i + 1], NumberStyles.Any, ci);
-                                psoRes.Add(new IterCost(iter, cost));
-                                if (iter > maxIter) maxIter = iter;
-                                if (cost > maxVal) maxVal = cost;
-                            }
-                        }
-                        if (File.Exists("sa.txt"))
-                        {
-                            string[] lines = File.ReadAllLines("sa.txt");
-                            for (int i = 0; i < lines.Length - 3; i+=2)
-                            {
-                                int iter = int.Parse(lines[i]);
-                                float cost = float.Parse(lines[i + 1], NumberStyles.Any, ci);
-                                saRes.Add(new IterCost(iter, cost));
-                                if (iter > maxIter) maxIter = iter;
-                                if (cost > maxVal) maxVal = cost;
-                            }
-                        }
-                        if (File.Exists("rs.txt"))
-                        {
-                            string[] lines = File.ReadAllLines("rs.txt");
-                            for (int i = 0; i < lines.Length - 3; i+=2)
-                            {
-                                int iter = int.Parse(lines[i]);
-                                float cost = float.Parse(lines[i + 1], NumberStyles.Any, ci);
-                                rsRes.Add(new IterCost(iter, cost));
-                                if (iter > maxIter) maxIter = iter;
-                                if (cost > maxVal) maxVal = cost;
-                            }
-                        }
-                        panel1.Invalidate();
-                    }
-                    else if(res.result == 0)
-                        throw new Exception("Błąd ładowania funkcji solveGraph z pliku PSO.dll");
+                    algo = new AlgoThread(this, openFile.FileName, 
+                        C1, C2, OMEGA, REHOPE, NOCHANGE, particles);
+                    thread = new Thread(algo.Run);
+                    thread.Start();
+                    startButton.Text = "Obliczanie ...";
                 }
             }
             catch (Exception exc)
             {
                 MessageBox.Show("Błąd: " + exc.Message);
+            }
+        }
+
+        public void OnAlgoEndHandler(AlgoThread algo)
+        {
+            vercicesCountLabel.Text = algo.res.verticesCount.ToString();
+            psoCostLabel.Text = algo.res.psoCost.ToString();
+            saCostLabel.Text = algo.res.saCost.ToString();
+            randomCostLabel.Text = algo.res.rsCost.ToString();
+            this.maxX = algo.maxIter;
+            this.maxY = algo.maxVal;
+            this.psoRes = algo.psoRes;
+            this.rsRes = algo.rsRes;
+            this.saRes = algo.saRes;
+            startButton.Text = "Załaduj i rozpocznij";
+            panel1.Invalidate();
+        }
+
+        public void OnAlgoEnd(AlgoThread algo)
+        {
+            if (this.InvokeRequired)
+                this.Invoke(new OnAlgoEndHandler(OnAlgoEnd), algo);
+            else
+            {
+                vercicesCountLabel.Text = algo.res.verticesCount.ToString();
+                psoCostLabel.Text = algo.res.psoCost.ToString();
+                saCostLabel.Text = algo.res.saCost.ToString();
+                randomCostLabel.Text = algo.res.rsCost.ToString();
+                this.maxX = algo.maxIter;
+                this.maxY = algo.maxVal;
+                this.psoRes = algo.psoRes;
+                this.rsRes = algo.rsRes;
+                this.saRes = algo.saRes;
+                startButton.Text = "Załaduj i rozpocznij";
+                panel1.Invalidate();
             }
         }
 
@@ -144,23 +126,11 @@ namespace PSO_GUI
         Brush redBrush = new SolidBrush(Color.Red);
         Brush greenBrush = new SolidBrush(Color.Green);
         Brush blueBrush = new SolidBrush(Color.Blue);
-
-        struct IterCost
-        {
-            public IterCost(int iter, float cost)
-            {
-                this.iter = iter;
-                this.cost = cost;
-            }
-            public int iter;
-            public float cost;
-        };
-
-        List<IterCost> psoRes = new List<IterCost>();
-        List<IterCost> saRes = new List<IterCost>();
-        List<IterCost> rsRes = new List<IterCost>();
-        int maxIter = 0;
-        float maxVal = 0.0f;
+        public List<PSO_GUI.AlgoThread.IterCost> psoRes = new List<PSO_GUI.AlgoThread.IterCost>();
+        public List<PSO_GUI.AlgoThread.IterCost> saRes = new List<PSO_GUI.AlgoThread.IterCost>();
+        public List<PSO_GUI.AlgoThread.IterCost> rsRes = new List<PSO_GUI.AlgoThread.IterCost>();
+        public int maxX = 0;
+        public float maxY = 0.0f;
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -179,33 +149,33 @@ namespace PSO_GUI
             e.Graphics.DrawString("Koszt", Form1.DefaultFont, blackBrush, new PointF(0, 0));
             e.Graphics.DrawString("Iteracje", Form1.DefaultFont, blackBrush, new PointF(panel1.Width - 50, panel1.Height - 30));
 
-            if (maxIter > 0 && maxVal > 0.0f)
+            if (maxX > 0 && maxY > 0.0f)
             {
                 int totalX = panel1.Width - 60;
                 int totalY = panel1.Height - 50;
                 for (int i = 0; i < psoRes.Count - 1; i++)
                 {
                     e.Graphics.DrawLine(redLine, 
-                        (psoRes[i].iter / (float)maxIter) * totalX + 10,
-                        ((maxVal - psoRes[i].cost) / maxVal) * totalY + 40,
-                        (psoRes[i+1].iter / (float)maxIter) * totalX + 10,
-                        ((maxVal - psoRes[i+1].cost) / maxVal) * totalY + 40);
+                        (psoRes[i].iter / (float)maxX) * totalX + 10,
+                        ((maxY - psoRes[i].cost) / maxY) * totalY + 40,
+                        (psoRes[i+1].iter / (float)maxX) * totalX + 10,
+                        ((maxY - psoRes[i+1].cost) / maxY) * totalY + 40);
                 }
                 for (int i = 0; i < saRes.Count - 1; i++)
                 {
                     e.Graphics.DrawLine(greenLine,
-                        (saRes[i].iter / (float)maxIter) * totalX + 10,
-                        ((maxVal - saRes[i].cost) / maxVal) * totalY + 40,
-                        (saRes[i + 1].iter / (float)maxIter) * totalX + 10,
-                        ((maxVal - saRes[i + 1].cost) / maxVal) * totalY + 40);
+                        (saRes[i].iter / (float)maxX) * totalX + 10,
+                        ((maxY - saRes[i].cost) / maxY) * totalY + 40,
+                        (saRes[i + 1].iter / (float)maxX) * totalX + 10,
+                        ((maxY - saRes[i + 1].cost) / maxY) * totalY + 40);
                 }
                 for (int i = 0; i < rsRes.Count - 1; i++)
                 {
                     e.Graphics.DrawLine(blueLine,
-                        (rsRes[i].iter / (float)maxIter) * totalX + 10,
-                        ((maxVal - rsRes[i].cost) / maxVal) * totalY + 40,
-                        (rsRes[i + 1].iter / (float)maxIter) * totalX + 10,
-                        ((maxVal - rsRes[i + 1].cost) / maxVal) * totalY + 40);
+                        (rsRes[i].iter / (float)maxX) * totalX + 10,
+                        ((maxY - rsRes[i].cost) / maxY) * totalY + 40,
+                        (rsRes[i + 1].iter / (float)maxX) * totalX + 10,
+                        ((maxY - rsRes[i + 1].cost) / maxY) * totalY + 40);
                 }
             }
         }
