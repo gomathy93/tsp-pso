@@ -43,6 +43,8 @@ namespace WMH {
 			int			iter;
 			/** Na potrzeby rysowania wykresu, wyniki w kolejnych iteracjach */
 			std::vector<IterCost>	iterResults;
+			/** Czy po zakonczeniu wykonac rehope (probe rozpoczecia jeszcze raz z najlepszej pozycji */
+			bool		rehope;
 		public:
 			// Wartosci domyslne
 			static const float DEF_C1; // C++ jest glupie, to trzeba zadeklarowac w .cpp
@@ -54,7 +56,8 @@ namespace WMH {
 			/** Tworzy roj rozwiazujacy TSP dla grafu g */
 			TspSwarm(const Graph* g, int particlesCount, 
 				float C1 = DEF_C1, float C2 = DEF_C2, float omega = DEF_OMEGA, 
-				int particleRehope = DEF_REHOPE, int maxNoChange = DEF_MAXNOCHANGE);
+				int particleRehope = DEF_REHOPE, int maxNoChange = DEF_MAXNOCHANGE, 
+				bool rehope = true);
 			/** Konstruktor kopiujacy */
 			TspSwarm(const TspSwarm& t2) {
 				assign(t2);

@@ -151,4 +151,11 @@ namespace WMH {
 
 		same_graphs_test(bestC1, bestC2, bestOMEGA, bestREHOPE);
 	}
+
+	void generate_and_save(const char* filename, int vertices) {
+		Graph g(vertices, 1.0f, 10.0f);
+		std::ofstream fout(filename);
+		fout << g;
+		fout.close();
+	}
 }

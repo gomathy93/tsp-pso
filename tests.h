@@ -12,4 +12,6 @@ namespace WMH {
 							int REHOPE = PSO::TspSwarm::DEF_REHOPE);
 	/** Wyszukuje najlepsze parametry */
 	void params_test();
+	/** Zapisuje losowy graf do pliku */
+	void generate_and_save(const char* filename, int vertices);
 }
